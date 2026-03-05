@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "test_type": "quality_evaluation",
+  "model_name": "model.safetensors",
+  "model_file": "model.safetensors",
+  "quant": "native",
+  "engine": "bitnet.cpp",
+  "timestamp": "2026-03-05T11:41:55Z",
+  "quality": {
+    "perplexity_wikitext2": null,
+    "mmlu_pro_5shot_pct": null,
+    "repetition_rate_pct": null
+  },
+  "files": {
+    "perplexity_log": "/logs/perplexity_model.safetensors.log",
+    "mmlu_log": "/logs/mmlu_model.safetensors.log",
+    "coherence_log": "/logs/coherence_model.safetensors.log"
+  }
+}

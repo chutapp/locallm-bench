@@ -1,0 +1,36 @@
+Step 1: Triggering OOM with GLM-4.7-Flash-Q3_K_M.gguf...
+Step 2: Recovery — loading Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf...
+Burst test: 3 rapid inferences with Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf...
+Cold vs warm start test with Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf...
+{
+  "test_type": "recovery",
+  "completed": true,
+  "tests": [
+    {
+      "name": "oom_recovery",
+      "oom_model": "GLM-4.7-Flash-Q3_K_M.gguf",
+      "fit_model": "Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+      "oom_exit_code": 0,
+      "recovery_exit_code": 0,
+      "recovery_time_sec": 97.85,
+      "recovered": true
+    },
+    {
+      "name": "burst_3x",
+      "model": "Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+      "times_sec": [
+        40.5,
+        39.87,
+        38.93
+      ],
+      "first_vs_third_ratio": 0.96
+    },
+    {
+      "name": "cold_vs_warm",
+      "model": "Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+      "cold_start_sec": 33.04,
+      "warm_start_sec": 28.64,
+      "speedup_ratio": 1.15
+    }
+  ]
+}

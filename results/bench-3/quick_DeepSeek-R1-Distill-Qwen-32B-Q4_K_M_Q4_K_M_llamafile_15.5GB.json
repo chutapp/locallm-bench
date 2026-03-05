@@ -1,0 +1,46 @@
+{
+  "completed": true,
+  "experiment_id": "quick_DeepSeek-R1-Distill-Qwen-32B-Q4_K_M_Q4_K_M_llamafile_15.5GB",
+  "metadata": {
+    "model_name": "DeepSeek-R1-Distill-Qwen-32B-Q4_K_M",
+    "model_file": "DeepSeek-R1-Distill-Qwen-32B-Q4_K_M.gguf",
+    "quant": "Q4_K_M",
+    "gguf_size_mb": 18931,
+    "engine": "llamafile",
+    "memory_tier_gb": 15.5,
+    "context_size": 2048,
+    "test_type": "quick",
+    "server": "locallm-bench-3",
+    "server_ip": "redacted",
+    "timestamp": "2026-03-05T07:24:31Z",
+    "cpu_model": "AMD EPYC-Rome Processor NotSpecified CPU @ 2.0GHz",
+    "cpu_cores": 8,
+    "total_ram_mb": 15613
+  },
+  "outcome": "ERROR",
+  "speed": {
+    "tokens_per_sec_generation": 0,
+    "tokens_per_sec_prompt": 0,
+    "ttft_ms": 0,
+    "model_load_time_sec": 0
+  },
+  "memory": {
+    "peak_rss_mb": 0,
+    "gguf_size_mb": 18931
+  },
+  "disk_io": {
+    "avg_read_mb_sec": 0
+  },
+  "user_experience": {
+    "usable": false,
+    "good": false,
+    "excellent": false
+  },
+  "files": {
+    "raw_log": "/logs/quick_DeepSeek-R1-Distill-Qwen-32B-Q4_K_M_Q4_K_M_llamafile_15.5GB_raw.log",
+    "process_monitor": "/metrics/quick_DeepSeek-R1-Distill-Qwen-32B-Q4_K_M_Q4_K_M_llamafile_15.5GB_process.json",
+    "disk_io_log": "/metrics/quick_DeepSeek-R1-Distill-Qwen-32B-Q4_K_M_Q4_K_M_llamafile_15.5GB_diskio.json",
+    "pre_snapshot": "/metrics/snapshot_pre_quick_DeepSeek-R1-Distill-Qwen-32B-Q4_K_M_Q4_K_M_llamafile_15.5GB_1772695469.json",
+    "post_snapshot": "/metrics/snapshot_post_quick_DeepSeek-R1-Distill-Qwen-32B-Q4_K_M_Q4_K_M_llamafile_15.5GB_1772695471.json"
+  }
+}

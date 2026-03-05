@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "test_type": "quality_evaluation",
+  "model_name": "DeepSeek-R1-Distill-Qwen-32B-Q2_K",
+  "model_file": "DeepSeek-R1-Distill-Qwen-32B-Q2_K.gguf",
+  "quant": "Q2_K",
+  "engine": "llama.cpp",
+  "timestamp": "2026-03-05T11:24:37Z",
+  "quality": {
+    "perplexity_wikitext2": null,
+    "mmlu_pro_5shot_pct": null,
+    "repetition_rate_pct": 5.9
+  },
+  "files": {
+    "perplexity_log": "/logs/perplexity_DeepSeek-R1-Distill-Qwen-32B-Q2_K.log",
+    "mmlu_log": "/logs/mmlu_DeepSeek-R1-Distill-Qwen-32B-Q2_K.log",
+    "coherence_log": "/logs/coherence_DeepSeek-R1-Distill-Qwen-32B-Q2_K.log"
+  }
+}

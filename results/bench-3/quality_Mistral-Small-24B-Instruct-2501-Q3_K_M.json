@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "test_type": "quality_evaluation",
+  "model_name": "Mistral-Small-24B-Instruct-2501-Q3_K_M",
+  "model_file": "Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf",
+  "quant": "Q3_K_M",
+  "engine": "llama.cpp",
+  "timestamp": "2026-03-05T10:49:28Z",
+  "quality": {
+    "perplexity_wikitext2": null,
+    "mmlu_pro_5shot_pct": null,
+    "repetition_rate_pct": 3.9
+  },
+  "files": {
+    "perplexity_log": "/logs/perplexity_Mistral-Small-24B-Instruct-2501-Q3_K_M.log",
+    "mmlu_log": "/logs/mmlu_Mistral-Small-24B-Instruct-2501-Q3_K_M.log",
+    "coherence_log": "/logs/coherence_Mistral-Small-24B-Instruct-2501-Q3_K_M.log"
+  }
+}

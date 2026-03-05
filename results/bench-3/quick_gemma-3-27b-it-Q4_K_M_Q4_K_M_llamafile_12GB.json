@@ -1,0 +1,46 @@
+{
+  "completed": true,
+  "experiment_id": "quick_gemma-3-27b-it-Q4_K_M_Q4_K_M_llamafile_12GB",
+  "metadata": {
+    "model_name": "gemma-3-27b-it-Q4_K_M",
+    "model_file": "gemma-3-27b-it-Q4_K_M.gguf",
+    "quant": "Q4_K_M",
+    "gguf_size_mb": 15779,
+    "engine": "llamafile",
+    "memory_tier_gb": 12,
+    "context_size": 2048,
+    "test_type": "quick",
+    "server": "locallm-bench-3",
+    "server_ip": "redacted",
+    "timestamp": "2026-03-05T07:22:02Z",
+    "cpu_model": "AMD EPYC-Rome Processor NotSpecified CPU @ 2.0GHz",
+    "cpu_cores": 8,
+    "total_ram_mb": 15613
+  },
+  "outcome": "ERROR",
+  "speed": {
+    "tokens_per_sec_generation": 0,
+    "tokens_per_sec_prompt": 0,
+    "ttft_ms": 0,
+    "model_load_time_sec": 0
+  },
+  "memory": {
+    "peak_rss_mb": 0,
+    "gguf_size_mb": 15779
+  },
+  "disk_io": {
+    "avg_read_mb_sec": 0
+  },
+  "user_experience": {
+    "usable": false,
+    "good": false,
+    "excellent": false
+  },
+  "files": {
+    "raw_log": "/logs/quick_gemma-3-27b-it-Q4_K_M_Q4_K_M_llamafile_12GB_raw.log",
+    "process_monitor": "/metrics/quick_gemma-3-27b-it-Q4_K_M_Q4_K_M_llamafile_12GB_process.json",
+    "disk_io_log": "/metrics/quick_gemma-3-27b-it-Q4_K_M_Q4_K_M_llamafile_12GB_diskio.json",
+    "pre_snapshot": "/metrics/snapshot_pre_quick_gemma-3-27b-it-Q4_K_M_Q4_K_M_llamafile_12GB_1772695320.json",
+    "post_snapshot": "/metrics/snapshot_post_quick_gemma-3-27b-it-Q4_K_M_Q4_K_M_llamafile_12GB_1772695322.json"
+  }
+}

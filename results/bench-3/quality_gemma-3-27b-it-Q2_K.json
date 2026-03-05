@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "test_type": "quality_evaluation",
+  "model_name": "gemma-3-27b-it-Q2_K",
+  "model_file": "gemma-3-27b-it-Q2_K.gguf",
+  "quant": "Q2_K",
+  "engine": "llama.cpp",
+  "timestamp": "2026-03-05T11:06:39Z",
+  "quality": {
+    "perplexity_wikitext2": null,
+    "mmlu_pro_5shot_pct": null,
+    "repetition_rate_pct": 2.7
+  },
+  "files": {
+    "perplexity_log": "/logs/perplexity_gemma-3-27b-it-Q2_K.log",
+    "mmlu_log": "/logs/mmlu_gemma-3-27b-it-Q2_K.log",
+    "coherence_log": "/logs/coherence_gemma-3-27b-it-Q2_K.log"
+  }
+}

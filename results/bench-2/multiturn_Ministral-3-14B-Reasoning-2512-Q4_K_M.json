@@ -1,0 +1,86 @@
+{
+  "completed": true,
+  "test_type": "multi_turn",
+  "model": "Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+  "num_turns": 10,
+  "summary": {
+    "tg_turn_1": 4.1,
+    "tg_turn_5": 4.0,
+    "tg_turn_10": 0,
+    "degradation_pct": 7.3
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "prompt": "What is machine learning?",
+      "tokens_per_sec": 4.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 68.47,
+      "conversation_length_chars": 544
+    },
+    {
+      "turn": 2,
+      "prompt": "How does it differ from deep learning?",
+      "tokens_per_sec": 4.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 81.18,
+      "conversation_length_chars": 1101
+    },
+    {
+      "turn": 3,
+      "prompt": "Can you give me an example with neural networks?",
+      "tokens_per_sec": 4.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 97.41,
+      "conversation_length_chars": 1668
+    },
+    {
+      "turn": 4,
+      "prompt": "What about transformer architecture specifically?",
+      "tokens_per_sec": 4.0,
+      "ttft_ms": 0,
+      "wall_time_sec": 112.86,
+      "conversation_length_chars": 2236
+    },
+    {
+      "turn": 5,
+      "prompt": "How do attention mechanisms work?",
+      "tokens_per_sec": 4.0,
+      "ttft_ms": 0,
+      "wall_time_sec": 127.3,
+      "conversation_length_chars": 2788
+    },
+    {
+      "turn": 6,
+      "prompt": "What is self-attention vs cross-attention?",
+      "tokens_per_sec": 3.9,
+      "ttft_ms": 0,
+      "wall_time_sec": 143.69,
+      "conversation_length_chars": 3349
+    },
+    {
+      "turn": 7,
+      "prompt": "Explain the concept of positional encoding.",
+      "tokens_per_sec": 3.9,
+      "ttft_ms": 0,
+      "wall_time_sec": 158.61,
+      "conversation_length_chars": 3911
+    },
+    {
+      "turn": 8,
+      "prompt": "How does BERT use transformers differently than GPT?",
+      "tokens_per_sec": 3.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 175.82,
+      "conversation_length_chars": 4482
+    },
+    {
+      "turn": 9,
+      "error": "Command '['llama-cli', '-m', '/models/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf', '--ctx-size', '4096', '--threads', '4', '--no-mmap', '--single-turn', '--prompt', 'User: What is machine learning?\\nAssistant:  aspects accurately and clearly. Let me break this down:\\n\\n1. **Definition**: First, I need to define machine learning in a way that\\'s easy to understand. It\\'s about computers learning patterns from data without explicit programming for each task.\\n\\n2. **Key Concepts**: I should mention the key concepts like supervised learning, unsupervised learning, and reinforcement learning. Maybe a brief explanation of each would help.\\n\\n3. **Applications\\n\\n[ Prompt: 7.9 t/s | Generation: 4.1 t/s ]\\n\\nExiting...\\n\\nUser: How does it differ from deep learning?\\nAssistant: ayers, its ability to handle complex patterns, and its reliance on large amounts of data. I should also touch on the architectural differences and the types of problems each is better suited for.\\n\\nFirst, I need to ensure that I\\'m building on the previous context. The user asked about machine learning, and now they\\'re asking about deep learning, so I should reference that initial explanation while providing the new information.\\n\\nNext, I need\\n\\n[ Prompt: 8.1 t/s | Generation: 4.1 t/s ]\\n\\nExiting...\\n\\nUser: Can you give me an example with neural networks?\\nAssistant:  a series of algorithms, often inspired by the human brain, designed to recognize patterns. They are a part of deep learning, which is a subset of machine learning.\\n\\nA good example would be image recognition. Let\\'s say we\\'re talking about recognizing handwritten digits, like those in the MNIST dataset. This is a classic example because it\\'s simple enough to understand but complex enough to demonstrate the power of neural networks.\\n\\nSo, I\\'ll\\n\\n[ Prompt: 8.1 t/s | Generation: 4.1 t/s ]\\n\\nExiting...\\n\\nUser: What about transformer architecture specifically?\\nAssistant: efining what transformers are. Transformers are a type of neural network architecture introduced by Vaswani et al. in their paper \"Attention is All You Need.\" They revolutionized the field by demonstrating that self-attention mechanisms could effectively capture long-range dependencies in data without relying on recurrent or convolutional layers.\\n\\nNext, I should break down the key components of transformers:\\n1. **Self-Attention Mechanism**:\\n\\n[ Prompt: 8.1 t/s | Generation: 4.0 t/s ]\\n\\nExiting...\\n\\nUser: How do attention mechanisms work?\\nAssistant: d topics, so I should maintain a logical flow while providing detailed explanations.\\n\\nFirst, I need to recall that the user started with a broad question about machine learning and then asked about deep learning, neural networks, and now attention mechanisms. I should make sure that each response is connected to the previous one, even if the user didn\\'t explicitly ask for that connection. For example, when explaining attention mechanisms, I\\n\\n[ Prompt: 8.1 t/s | Generation: 4.0 t/s ]\\n\\nExiting...\\n\\nUser: What is self-attention vs cross-attention?\\nAssistant: s are, since the user asked about them in the previous question. Attention mechanisms are a way for neural networks to focus on certain parts of the input data when making predictions or generating outputs. They help the model understand the context and relationships between different elements in the data.\\n\\nNow, for self-attention vs cross-attention:\\n\\n1. **Self-Attention**:\\n   - Self-attention is when the model focuses on different parts of\\n\\n[ Prompt: 8.0 t/s | Generation: 3.9 t/s ]\\n\\nExiting...\\n\\nUser: Explain the concept of positional encoding.\\nAssistant: nd builds upon the previous discussions about attention mechanisms and transformers.\\n\\nFirst, I recall that positional encoding is used in transformers to provide information about the order of tokens in a sequence. This is important because, unlike recurrent neural networks (RNNs) or convolutional neural networks (CNNs), transformers do not have a inherent sense of order or sequence. They process the input in parallel, so they need some way\\n\\n[ Prompt: 8.0 t/s | Generation: 3.9 t/s ]\\n\\nExiting...\\n\\nUser: How does BERT use transformers differently than GPT?\\nAssistant: transformer architecture, but they were designed for different tasks and have different training approaches.\\n\\n### Key Differences:\\n1. **Task Orientation**:\\n   - BERT is primarily designed for tasks that require understanding the context in both directions, like question answering or natural language inference. It\\'s an encoder-only model, meaning it processes input data and generates representations that are used for downstream tasks.\\n   - G\\n\\n[ Prompt: 8.0 t/s | Generation: 3.8 t/s ]\\n\\nExiting...\\n\\nUser: What are the main challenges in training large language models?\\nAssistant: ', '--n-predict', '150', '--log-disable']' timed out after 180 seconds"
+    },
+    {
+      "turn": 10,
+      "error": "Command '['llama-cli', '-m', '/models/Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf', '--ctx-size', '4096', '--threads', '4', '--no-mmap', '--single-turn', '--prompt', 'User: What is machine learning?\\nAssistant:  aspects accurately and clearly. Let me break this down:\\n\\n1. **Definition**: First, I need to define machine learning in a way that\\'s easy to understand. It\\'s about computers learning patterns from data without explicit programming for each task.\\n\\n2. **Key Concepts**: I should mention the key concepts like supervised learning, unsupervised learning, and reinforcement learning. Maybe a brief explanation of each would help.\\n\\n3. **Applications\\n\\n[ Prompt: 7.9 t/s | Generation: 4.1 t/s ]\\n\\nExiting...\\n\\nUser: How does it differ from deep learning?\\nAssistant: ayers, its ability to handle complex patterns, and its reliance on large amounts of data. I should also touch on the architectural differences and the types of problems each is better suited for.\\n\\nFirst, I need to ensure that I\\'m building on the previous context. The user asked about machine learning, and now they\\'re asking about deep learning, so I should reference that initial explanation while providing the new information.\\n\\nNext, I need\\n\\n[ Prompt: 8.1 t/s | Generation: 4.1 t/s ]\\n\\nExiting...\\n\\nUser: Can you give me an example with neural networks?\\nAssistant:  a series of algorithms, often inspired by the human brain, designed to recognize patterns. They are a part of deep learning, which is a subset of machine learning.\\n\\nA good example would be image recognition. Let\\'s say we\\'re talking about recognizing handwritten digits, like those in the MNIST dataset. This is a classic example because it\\'s simple enough to understand but complex enough to demonstrate the power of neural networks.\\n\\nSo, I\\'ll\\n\\n[ Prompt: 8.1 t/s | Generation: 4.1 t/s ]\\n\\nExiting...\\n\\nUser: What about transformer architecture specifically?\\nAssistant: efining what transformers are. Transformers are a type of neural network architecture introduced by Vaswani et al. in their paper \"Attention is All You Need.\" They revolutionized the field by demonstrating that self-attention mechanisms could effectively capture long-range dependencies in data without relying on recurrent or convolutional layers.\\n\\nNext, I should break down the key components of transformers:\\n1. **Self-Attention Mechanism**:\\n\\n[ Prompt: 8.1 t/s | Generation: 4.0 t/s ]\\n\\nExiting...\\n\\nUser: How do attention mechanisms work?\\nAssistant: d topics, so I should maintain a logical flow while providing detailed explanations.\\n\\nFirst, I need to recall that the user started with a broad question about machine learning and then asked about deep learning, neural networks, and now attention mechanisms. I should make sure that each response is connected to the previous one, even if the user didn\\'t explicitly ask for that connection. For example, when explaining attention mechanisms, I\\n\\n[ Prompt: 8.1 t/s | Generation: 4.0 t/s ]\\n\\nExiting...\\n\\nUser: What is self-attention vs cross-attention?\\nAssistant: s are, since the user asked about them in the previous question. Attention mechanisms are a way for neural networks to focus on certain parts of the input data when making predictions or generating outputs. They help the model understand the context and relationships between different elements in the data.\\n\\nNow, for self-attention vs cross-attention:\\n\\n1. **Self-Attention**:\\n   - Self-attention is when the model focuses on different parts of\\n\\n[ Prompt: 8.0 t/s | Generation: 3.9 t/s ]\\n\\nExiting...\\n\\nUser: Explain the concept of positional encoding.\\nAssistant: nd builds upon the previous discussions about attention mechanisms and transformers.\\n\\nFirst, I recall that positional encoding is used in transformers to provide information about the order of tokens in a sequence. This is important because, unlike recurrent neural networks (RNNs) or convolutional neural networks (CNNs), transformers do not have a inherent sense of order or sequence. They process the input in parallel, so they need some way\\n\\n[ Prompt: 8.0 t/s | Generation: 3.9 t/s ]\\n\\nExiting...\\n\\nUser: How does BERT use transformers differently than GPT?\\nAssistant: transformer architecture, but they were designed for different tasks and have different training approaches.\\n\\n### Key Differences:\\n1. **Task Orientation**:\\n   - BERT is primarily designed for tasks that require understanding the context in both directions, like question answering or natural language inference. It\\'s an encoder-only model, meaning it processes input data and generates representations that are used for downstream tasks.\\n   - G\\n\\n[ Prompt: 8.0 t/s | Generation: 3.8 t/s ]\\n\\nExiting...\\n\\nUser: What are the main challenges in training large language models?\\nAssistant: User: Summarize everything we discussed in 3 bullet points.\\nAssistant: ', '--n-predict', '150', '--log-disable']' timed out after 180 seconds"
+    }
+  ]
+}

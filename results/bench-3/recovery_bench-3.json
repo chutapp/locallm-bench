@@ -1,0 +1,36 @@
+Step 1: Triggering OOM with Mistral-Small-24B-Instruct-2501-Q4_K_M.gguf...
+Step 2: Recovery — loading Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf...
+Burst test: 3 rapid inferences with Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf...
+Cold vs warm start test with Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf...
+{
+  "test_type": "recovery",
+  "completed": true,
+  "tests": [
+    {
+      "name": "oom_recovery",
+      "oom_model": "Mistral-Small-24B-Instruct-2501-Q4_K_M.gguf",
+      "fit_model": "Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf",
+      "oom_exit_code": 0,
+      "recovery_exit_code": 0,
+      "recovery_time_sec": 101.37,
+      "recovered": true
+    },
+    {
+      "name": "burst_3x",
+      "model": "Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf",
+      "times_sec": [
+        19.23,
+        24.64,
+        19.06
+      ],
+      "first_vs_third_ratio": 0.99
+    },
+    {
+      "name": "cold_vs_warm",
+      "model": "Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf",
+      "cold_start_sec": 18.46,
+      "warm_start_sec": 17.69,
+      "speedup_ratio": 1.04
+    }
+  ]
+}

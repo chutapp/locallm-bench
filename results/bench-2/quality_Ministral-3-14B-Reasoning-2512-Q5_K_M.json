@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "test_type": "quality_evaluation",
+  "model_name": "Ministral-3-14B-Reasoning-2512-Q5_K_M",
+  "model_file": "Ministral-3-14B-Reasoning-2512-Q5_K_M.gguf",
+  "quant": "Q5_K_M",
+  "engine": "llama.cpp",
+  "timestamp": "2026-03-05T10:53:01Z",
+  "quality": {
+    "perplexity_wikitext2": null,
+    "mmlu_pro_5shot_pct": null,
+    "repetition_rate_pct": 6.0
+  },
+  "files": {
+    "perplexity_log": "/logs/perplexity_Ministral-3-14B-Reasoning-2512-Q5_K_M.log",
+    "mmlu_log": "/logs/mmlu_Ministral-3-14B-Reasoning-2512-Q5_K_M.log",
+    "coherence_log": "/logs/coherence_Ministral-3-14B-Reasoning-2512-Q5_K_M.log"
+  }
+}

@@ -1,0 +1,36 @@
+Step 1: Triggering OOM with Qwen3.5-35B-A3B-Q3_K_M.gguf...
+Step 2: Recovery — loading Qwen3.5-35B-A3B-Q2_K.gguf...
+Burst test: 3 rapid inferences with Qwen3.5-35B-A3B-Q2_K.gguf...
+Cold vs warm start test with Qwen3.5-35B-A3B-Q2_K.gguf...
+{
+  "test_type": "recovery",
+  "completed": true,
+  "tests": [
+    {
+      "name": "oom_recovery",
+      "oom_model": "Qwen3.5-35B-A3B-Q3_K_M.gguf",
+      "fit_model": "Qwen3.5-35B-A3B-Q2_K.gguf",
+      "oom_exit_code": 0,
+      "recovery_exit_code": 0,
+      "recovery_time_sec": 92.11,
+      "recovered": true
+    },
+    {
+      "name": "burst_3x",
+      "model": "Qwen3.5-35B-A3B-Q2_K.gguf",
+      "times_sec": [
+        32.08,
+        32.14,
+        32.06
+      ],
+      "first_vs_third_ratio": 1.0
+    },
+    {
+      "name": "cold_vs_warm",
+      "model": "Qwen3.5-35B-A3B-Q2_K.gguf",
+      "cold_start_sec": 21.45,
+      "warm_start_sec": 20.72,
+      "speedup_ratio": 1.04
+    }
+  ]
+}

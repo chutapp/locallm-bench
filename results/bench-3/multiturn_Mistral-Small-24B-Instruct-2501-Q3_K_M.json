@@ -1,0 +1,86 @@
+{
+  "completed": true,
+  "test_type": "multi_turn",
+  "model": "Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf",
+  "num_turns": 10,
+  "summary": {
+    "tg_turn_1": 3.1,
+    "tg_turn_5": 3.1,
+    "tg_turn_10": 0,
+    "degradation_pct": 3.2
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "prompt": "What is machine learning?",
+      "tokens_per_sec": 3.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 65.63,
+      "conversation_length_chars": 544
+    },
+    {
+      "turn": 2,
+      "prompt": "How does it differ from deep learning?",
+      "tokens_per_sec": 3.2,
+      "ttft_ms": 0,
+      "wall_time_sec": 77.38,
+      "conversation_length_chars": 1101
+    },
+    {
+      "turn": 3,
+      "prompt": "Can you give me an example with neural networks?",
+      "tokens_per_sec": 3.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 93.1,
+      "conversation_length_chars": 1668
+    },
+    {
+      "turn": 4,
+      "prompt": "What about transformer architecture specifically?",
+      "tokens_per_sec": 3.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 109.75,
+      "conversation_length_chars": 2236
+    },
+    {
+      "turn": 5,
+      "prompt": "How do attention mechanisms work?",
+      "tokens_per_sec": 3.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 124.42,
+      "conversation_length_chars": 2788
+    },
+    {
+      "turn": 6,
+      "prompt": "What is self-attention vs cross-attention?",
+      "tokens_per_sec": 3.1,
+      "ttft_ms": 0,
+      "wall_time_sec": 140.07,
+      "conversation_length_chars": 3349
+    },
+    {
+      "turn": 7,
+      "prompt": "Explain the concept of positional encoding.",
+      "tokens_per_sec": 3.2,
+      "ttft_ms": 0,
+      "wall_time_sec": 154.41,
+      "conversation_length_chars": 3911
+    },
+    {
+      "turn": 8,
+      "prompt": "How does BERT use transformers differently than GPT?",
+      "tokens_per_sec": 3.0,
+      "ttft_ms": 0,
+      "wall_time_sec": 172.23,
+      "conversation_length_chars": 4482
+    },
+    {
+      "turn": 9,
+      "error": "Command '['llama-cli', '-m', '/models/Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf', '--ctx-size', '4096', '--threads', '8', '--no-mmap', '--single-turn', '--prompt', 'User: What is machine learning?\\nAssistant: epts in machine learning:\\n\\n1. **Types of Machine Learning**:\\n   - **Supervised Learning**: The model is trained on a labeled dataset, meaning that each training example is paired with an output label. The goal is to learn a mapping from inputs to outputs.\\n   - **Unsupervised Learning**: The model is trained on an unlabeled dataset. The goal is to find patterns or structure in the data without explicit guidance.\\n   - **Reinforcement Learning\\n\\n[ Prompt: 7.4 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: How does it differ from deep learning?\\nAssistant: , such as decision trees, support vector machines, and neural networks.\\n   - **Deep Learning (DL)**: This is a subset of machine learning that specifically uses neural networks with many layers (hence the term \"deep\") to model complex patterns in data. Deep learning models are particularly effective for tasks involving large amounts of data, such as image and speech recognition.\\n\\n2. **Model Complexity**:\\n   - **Machine Learning**: ML models\\n\\n[ Prompt: 9.0 t/s | Generation: 3.2 t/s ]\\n\\nExiting...\\n\\nUser: Can you give me an example with neural networks?\\nAssistant: s)\\n\\n**Problem**: You want to build a system that can classify images of cats and dogs.\\n\\n**Steps Involved**:\\n\\n1. **Data Collection**: Gather a large dataset of labeled images, where each image is labeled as either \"cat\" or \"dog\".\\n\\n2. **Data Preprocessing**:\\n   - Resize the images to a consistent size (e.g., 64x64 pixels).\\n   - Normalize the pixel values to a range of 0 to 1.\\n   - Split the dataset into training, validation, and test sets.\\n\\n3\\n\\n[ Prompt: 8.9 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: What about transformer architecture specifically?\\nAssistant: sformer architecture:\\n\\n### Key Components of the Transformer Architecture:\\n\\n1. **Self-Attention Mechanism**:\\n   - **Attention Scores**: The model computes attention scores to determine the relevance of each element in the sequence to every other element.\\n   - **Weighted Sum**: It then computes a weighted sum of the values based on these attention scores.\\n   - **Multi-Head Attention**: This allows the model to focus on different parts of the\\n\\n[ Prompt: 8.9 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: How do attention mechanisms work?\\nAssistant: uery (Q)**: Represents the current position in the sequence for which the model is trying to generate an output.\\n   - **Key (K)**: Represents all positions in the sequence that the model can attend to.\\n   - **Value (V)**: Represents the actual content at each position in the sequence.\\n\\n2. **Attention Scores**:\\n   - The model computes attention scores by taking the dot product of the query with all the keys. This step measures the similarity\\n\\n[ Prompt: 8.9 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: What is self-attention vs cross-attention?\\nAssistant: input sequence relative to each other. Here\\'s how it works:\\n\\n- **Query (Q), Key (K), and Value (V)**: Each position in the input sequence has three vectors: a query, a key, and a value.\\n- **Attention Scores**: The model computes attention scores by taking the dot product of the query with all the keys. This helps in determining the relevance of each element in the sequence to every other element.\\n- **Weighted Sum**: The attention scores are\\n\\n[ Prompt: 8.8 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: Explain the concept of positional encoding.\\nAssistant:  model to understand the sequence of tokens.\\n\\n### Key Concepts:\\n\\n1. **Need for Positional Encoding**:\\n   - Transformers process input sequences in parallel, which means they do not inherently capture the order of tokens. Positional encoding provides the model with information about the position of each token in the sequence.\\n\\n2. **Types of Positional Encoding**:\\n   - **Absolute Positional Encoding**: Each token is assigned a unique encoding\\n\\n[ Prompt: 8.7 t/s | Generation: 3.2 t/s ]\\n\\nExiting...\\n\\nUser: How does BERT use transformers differently than GPT?\\nAssistant: ansformers):\\n\\n1. **Architecture**:\\n   - **Bidirectional**: BERT uses a bidirectional transformer encoder, meaning it processes the input sequence from both directions (left-to-right and right-to-left) simultaneously. This allows it to consider the context from both past and future tokens.\\n\\n2. **Training Objectives**:\\n   - **Masked Language Modeling (MLM)**: BERT is trained to predict randomly masked tokens in the input sequence.\\n   - **Next\\n\\n[ Prompt: 8.7 t/s | Generation: 3.0 t/s ]\\n\\nExiting...\\n\\nUser: What are the main challenges in training large language models?\\nAssistant: ', '--n-predict', '150', '--log-disable']' timed out after 180 seconds"
+    },
+    {
+      "turn": 10,
+      "error": "Command '['llama-cli', '-m', '/models/Mistral-Small-24B-Instruct-2501-Q3_K_M.gguf', '--ctx-size', '4096', '--threads', '8', '--no-mmap', '--single-turn', '--prompt', 'User: What is machine learning?\\nAssistant: epts in machine learning:\\n\\n1. **Types of Machine Learning**:\\n   - **Supervised Learning**: The model is trained on a labeled dataset, meaning that each training example is paired with an output label. The goal is to learn a mapping from inputs to outputs.\\n   - **Unsupervised Learning**: The model is trained on an unlabeled dataset. The goal is to find patterns or structure in the data without explicit guidance.\\n   - **Reinforcement Learning\\n\\n[ Prompt: 7.4 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: How does it differ from deep learning?\\nAssistant: , such as decision trees, support vector machines, and neural networks.\\n   - **Deep Learning (DL)**: This is a subset of machine learning that specifically uses neural networks with many layers (hence the term \"deep\") to model complex patterns in data. Deep learning models are particularly effective for tasks involving large amounts of data, such as image and speech recognition.\\n\\n2. **Model Complexity**:\\n   - **Machine Learning**: ML models\\n\\n[ Prompt: 9.0 t/s | Generation: 3.2 t/s ]\\n\\nExiting...\\n\\nUser: Can you give me an example with neural networks?\\nAssistant: s)\\n\\n**Problem**: You want to build a system that can classify images of cats and dogs.\\n\\n**Steps Involved**:\\n\\n1. **Data Collection**: Gather a large dataset of labeled images, where each image is labeled as either \"cat\" or \"dog\".\\n\\n2. **Data Preprocessing**:\\n   - Resize the images to a consistent size (e.g., 64x64 pixels).\\n   - Normalize the pixel values to a range of 0 to 1.\\n   - Split the dataset into training, validation, and test sets.\\n\\n3\\n\\n[ Prompt: 8.9 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: What about transformer architecture specifically?\\nAssistant: sformer architecture:\\n\\n### Key Components of the Transformer Architecture:\\n\\n1. **Self-Attention Mechanism**:\\n   - **Attention Scores**: The model computes attention scores to determine the relevance of each element in the sequence to every other element.\\n   - **Weighted Sum**: It then computes a weighted sum of the values based on these attention scores.\\n   - **Multi-Head Attention**: This allows the model to focus on different parts of the\\n\\n[ Prompt: 8.9 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: How do attention mechanisms work?\\nAssistant: uery (Q)**: Represents the current position in the sequence for which the model is trying to generate an output.\\n   - **Key (K)**: Represents all positions in the sequence that the model can attend to.\\n   - **Value (V)**: Represents the actual content at each position in the sequence.\\n\\n2. **Attention Scores**:\\n   - The model computes attention scores by taking the dot product of the query with all the keys. This step measures the similarity\\n\\n[ Prompt: 8.9 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: What is self-attention vs cross-attention?\\nAssistant: input sequence relative to each other. Here\\'s how it works:\\n\\n- **Query (Q), Key (K), and Value (V)**: Each position in the input sequence has three vectors: a query, a key, and a value.\\n- **Attention Scores**: The model computes attention scores by taking the dot product of the query with all the keys. This helps in determining the relevance of each element in the sequence to every other element.\\n- **Weighted Sum**: The attention scores are\\n\\n[ Prompt: 8.8 t/s | Generation: 3.1 t/s ]\\n\\nExiting...\\n\\nUser: Explain the concept of positional encoding.\\nAssistant:  model to understand the sequence of tokens.\\n\\n### Key Concepts:\\n\\n1. **Need for Positional Encoding**:\\n   - Transformers process input sequences in parallel, which means they do not inherently capture the order of tokens. Positional encoding provides the model with information about the position of each token in the sequence.\\n\\n2. **Types of Positional Encoding**:\\n   - **Absolute Positional Encoding**: Each token is assigned a unique encoding\\n\\n[ Prompt: 8.7 t/s | Generation: 3.2 t/s ]\\n\\nExiting...\\n\\nUser: How does BERT use transformers differently than GPT?\\nAssistant: ansformers):\\n\\n1. **Architecture**:\\n   - **Bidirectional**: BERT uses a bidirectional transformer encoder, meaning it processes the input sequence from both directions (left-to-right and right-to-left) simultaneously. This allows it to consider the context from both past and future tokens.\\n\\n2. **Training Objectives**:\\n   - **Masked Language Modeling (MLM)**: BERT is trained to predict randomly masked tokens in the input sequence.\\n   - **Next\\n\\n[ Prompt: 8.7 t/s | Generation: 3.0 t/s ]\\n\\nExiting...\\n\\nUser: What are the main challenges in training large language models?\\nAssistant: User: Summarize everything we discussed in 3 bullet points.\\nAssistant: ', '--n-predict', '150', '--log-disable']' timed out after 180 seconds"
+    }
+  ]
+}

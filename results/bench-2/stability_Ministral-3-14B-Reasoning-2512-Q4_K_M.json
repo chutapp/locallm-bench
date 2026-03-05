@@ -1,0 +1,353 @@
+{
+  "completed": true,
+  "test_type": "stability_30min",
+  "model": "Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+  "duration_sec": 1800,
+  "num_samples": 33,
+  "summary": {
+    "tg_start": 4.0,
+    "tg_end": 4.1,
+    "tg_min": 4.0,
+    "tg_max": 4.2,
+    "tg_avg": 4.178787878787879,
+    "tg_degradation_pct": -2.5,
+    "mem_start_mb": 507,
+    "mem_end_mb": 506,
+    "mem_leak_mb": -1,
+    "temp_start_c": null,
+    "temp_peak_c": null,
+    "thermal_throttle_detected": false
+  },
+  "samples": [
+    {
+      "elapsed_sec": 59.9,
+      "minute": 1.0,
+      "tokens_per_sec": 4.0,
+      "mem_available_mb": 15103,
+      "mem_used_mb": 507,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:23:37Z"
+    },
+    {
+      "elapsed_sec": 115.2,
+      "minute": 1.9,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15103,
+      "mem_used_mb": 507,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:24:32Z"
+    },
+    {
+      "elapsed_sec": 172.1,
+      "minute": 2.9,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15089,
+      "mem_used_mb": 521,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:25:29Z"
+    },
+    {
+      "elapsed_sec": 227.5,
+      "minute": 3.8,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15088,
+      "mem_used_mb": 522,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:26:25Z"
+    },
+    {
+      "elapsed_sec": 283.2,
+      "minute": 4.7,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15091,
+      "mem_used_mb": 519,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:27:20Z"
+    },
+    {
+      "elapsed_sec": 338.7,
+      "minute": 5.6,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15107,
+      "mem_used_mb": 503,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:28:16Z"
+    },
+    {
+      "elapsed_sec": 394.9,
+      "minute": 6.6,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15096,
+      "mem_used_mb": 514,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:29:12Z"
+    },
+    {
+      "elapsed_sec": 450.1,
+      "minute": 7.5,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15101,
+      "mem_used_mb": 509,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:30:07Z"
+    },
+    {
+      "elapsed_sec": 504.7,
+      "minute": 8.4,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15093,
+      "mem_used_mb": 517,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:31:02Z"
+    },
+    {
+      "elapsed_sec": 559.4,
+      "minute": 9.3,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15062,
+      "mem_used_mb": 548,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:31:56Z"
+    },
+    {
+      "elapsed_sec": 614.0,
+      "minute": 10.2,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15097,
+      "mem_used_mb": 513,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:32:51Z"
+    },
+    {
+      "elapsed_sec": 668.5,
+      "minute": 11.1,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15103,
+      "mem_used_mb": 507,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:33:46Z"
+    },
+    {
+      "elapsed_sec": 723.3,
+      "minute": 12.1,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15085,
+      "mem_used_mb": 525,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:34:40Z"
+    },
+    {
+      "elapsed_sec": 777.8,
+      "minute": 13.0,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15107,
+      "mem_used_mb": 503,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:35:35Z"
+    },
+    {
+      "elapsed_sec": 832.3,
+      "minute": 13.9,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15096,
+      "mem_used_mb": 514,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:36:29Z"
+    },
+    {
+      "elapsed_sec": 887.1,
+      "minute": 14.8,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15105,
+      "mem_used_mb": 505,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:37:24Z"
+    },
+    {
+      "elapsed_sec": 942.0,
+      "minute": 15.7,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15086,
+      "mem_used_mb": 524,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:38:19Z"
+    },
+    {
+      "elapsed_sec": 996.7,
+      "minute": 16.6,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15104,
+      "mem_used_mb": 506,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:39:14Z"
+    },
+    {
+      "elapsed_sec": 1051.6,
+      "minute": 17.5,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15092,
+      "mem_used_mb": 518,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:40:09Z"
+    },
+    {
+      "elapsed_sec": 1106.4,
+      "minute": 18.4,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15102,
+      "mem_used_mb": 508,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:41:03Z"
+    },
+    {
+      "elapsed_sec": 1160.9,
+      "minute": 19.3,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15101,
+      "mem_used_mb": 509,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:41:58Z"
+    },
+    {
+      "elapsed_sec": 1215.5,
+      "minute": 20.3,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15098,
+      "mem_used_mb": 512,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:42:53Z"
+    },
+    {
+      "elapsed_sec": 1270.6,
+      "minute": 21.2,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15099,
+      "mem_used_mb": 511,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:43:48Z"
+    },
+    {
+      "elapsed_sec": 1325.5,
+      "minute": 22.1,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15103,
+      "mem_used_mb": 507,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:44:43Z"
+    },
+    {
+      "elapsed_sec": 1380.5,
+      "minute": 23.0,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15090,
+      "mem_used_mb": 520,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:45:38Z"
+    },
+    {
+      "elapsed_sec": 1435.7,
+      "minute": 23.9,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15098,
+      "mem_used_mb": 512,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:46:33Z"
+    },
+    {
+      "elapsed_sec": 1490.7,
+      "minute": 24.8,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15120,
+      "mem_used_mb": 490,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:47:28Z"
+    },
+    {
+      "elapsed_sec": 1545.9,
+      "minute": 25.8,
+      "tokens_per_sec": 4.2,
+      "mem_available_mb": 15099,
+      "mem_used_mb": 511,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:48:23Z"
+    },
+    {
+      "elapsed_sec": 1601.0,
+      "minute": 26.7,
+      "tokens_per_sec": 4.1,
+      "mem_available_mb": 15104,
+      "mem_used_mb": 506,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:49:18Z"
+    },
+    {
+      "elapsed_sec": 1656.0,
+      "minute": 27.6,
+      "tokens_per_sec": 4.1,
+      "mem_available_mb": 15103,
+      "mem_used_mb": 507,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:50:13Z"
+    },
+    {
+      "elapsed_sec": 1711.3,
+      "minute": 28.5,
+      "tokens_per_sec": 4.1,
+      "mem_available_mb": 15104,
+      "mem_used_mb": 506,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:51:08Z"
+    },
+    {
+      "elapsed_sec": 1766.5,
+      "minute": 29.4,
+      "tokens_per_sec": 4.1,
+      "mem_available_mb": 15099,
+      "mem_used_mb": 511,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:52:04Z"
+    },
+    {
+      "elapsed_sec": 1821.8,
+      "minute": 30.4,
+      "tokens_per_sec": 4.1,
+      "mem_available_mb": 15104,
+      "mem_used_mb": 506,
+      "cpu_temp_c": null,
+      "cpu_freq_mhz": 2399.998,
+      "timestamp": "2026-03-05T08:52:59Z"
+    }
+  ]
+}

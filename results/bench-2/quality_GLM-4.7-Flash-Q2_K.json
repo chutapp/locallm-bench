@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "test_type": "quality_evaluation",
+  "model_name": "GLM-4.7-Flash-Q2_K",
+  "model_file": "GLM-4.7-Flash-Q2_K.gguf",
+  "quant": "Q2_K",
+  "engine": "llama.cpp",
+  "timestamp": "2026-03-05T10:02:24Z",
+  "quality": {
+    "perplexity_wikitext2": null,
+    "mmlu_pro_5shot_pct": null,
+    "repetition_rate_pct": 3.4
+  },
+  "files": {
+    "perplexity_log": "/logs/perplexity_GLM-4.7-Flash-Q2_K.log",
+    "mmlu_log": "/logs/mmlu_GLM-4.7-Flash-Q2_K.log",
+    "coherence_log": "/logs/coherence_GLM-4.7-Flash-Q2_K.log"
+  }
+}

@@ -1,0 +1,33 @@
+# Secrets — NEVER commit these
+api.txt
+*.env
+server.env
+*.pem
+*.key
+~/.ssh/
+
+# SSH keys
+hetzner_locallm*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large files
+*.gguf
+*.bin
+*.safetensors

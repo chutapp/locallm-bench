@@ -1,0 +1,94 @@
+{
+  "completed": true,
+  "test_type": "multi_turn",
+  "model": "GLM-4.7-Flash-Q2_K.gguf",
+  "num_turns": 10,
+  "summary": {
+    "tg_turn_1": 6.7,
+    "tg_turn_5": 6.2,
+    "tg_turn_10": 5.5,
+    "degradation_pct": 17.9
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "prompt": "What is machine learning?",
+      "tokens_per_sec": 6.7,
+      "ttft_ms": 0,
+      "wall_time_sec": 38.16,
+      "conversation_length_chars": 544
+    },
+    {
+      "turn": 2,
+      "prompt": "How does it differ from deep learning?",
+      "tokens_per_sec": 6.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 45.9,
+      "conversation_length_chars": 1101
+    },
+    {
+      "turn": 3,
+      "prompt": "Can you give me an example with neural networks?",
+      "tokens_per_sec": 6.5,
+      "ttft_ms": 0,
+      "wall_time_sec": 54.28,
+      "conversation_length_chars": 1668
+    },
+    {
+      "turn": 4,
+      "prompt": "What about transformer architecture specifically?",
+      "tokens_per_sec": 6.4,
+      "ttft_ms": 0,
+      "wall_time_sec": 61.53,
+      "conversation_length_chars": 2236
+    },
+    {
+      "turn": 5,
+      "prompt": "How do attention mechanisms work?",
+      "tokens_per_sec": 6.2,
+      "ttft_ms": 0,
+      "wall_time_sec": 70.65,
+      "conversation_length_chars": 2788
+    },
+    {
+      "turn": 6,
+      "prompt": "What is self-attention vs cross-attention?",
+      "tokens_per_sec": 6.0,
+      "ttft_ms": 0,
+      "wall_time_sec": 80.07,
+      "conversation_length_chars": 3349
+    },
+    {
+      "turn": 7,
+      "prompt": "Explain the concept of positional encoding.",
+      "tokens_per_sec": 5.9,
+      "ttft_ms": 0,
+      "wall_time_sec": 88.79,
+      "conversation_length_chars": 3911
+    },
+    {
+      "turn": 8,
+      "prompt": "How does BERT use transformers differently than GPT?",
+      "tokens_per_sec": 5.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 97.76,
+      "conversation_length_chars": 4482
+    },
+    {
+      "turn": 9,
+      "prompt": "What are the main challenges in training large language models?",
+      "tokens_per_sec": 5.7,
+      "ttft_ms": 0,
+      "wall_time_sec": 106.51,
+      "conversation_length_chars": 5064
+    },
+    {
+      "turn": 10,
+      "prompt": "Summarize everything we discussed in 3 bullet points.",
+      "tokens_per_sec": 5.5,
+      "ttft_ms": 0,
+      "wall_time_sec": 118.36,
+      "conversation_length_chars": 5636
+    }
+  ]
+}

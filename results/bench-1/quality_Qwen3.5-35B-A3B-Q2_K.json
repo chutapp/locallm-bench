@@ -1,0 +1,19 @@
+{
+  "completed": true,
+  "test_type": "quality_evaluation",
+  "model_name": "Qwen3.5-35B-A3B-Q2_K",
+  "model_file": "Qwen3.5-35B-A3B-Q2_K.gguf",
+  "quant": "Q2_K",
+  "engine": "llama.cpp",
+  "timestamp": "2026-03-05T07:59:27Z",
+  "quality": {
+    "perplexity_wikitext2": null,
+    "mmlu_pro_5shot_pct": null,
+    "repetition_rate_pct": 4.3
+  },
+  "files": {
+    "perplexity_log": "/logs/perplexity_Qwen3.5-35B-A3B-Q2_K.log",
+    "mmlu_log": "/logs/mmlu_Qwen3.5-35B-A3B-Q2_K.log",
+    "coherence_log": "/logs/coherence_Qwen3.5-35B-A3B-Q2_K.log"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "completed": true,
+  "test_type": "multi_turn",
+  "model": "gemma-3-27b-it-Q2_K.gguf",
+  "num_turns": 10,
+  "summary": {
+    "tg_turn_1": 2.9,
+    "tg_turn_5": 2.8,
+    "tg_turn_10": 0,
+    "degradation_pct": 13.8
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "prompt": "What is machine learning?",
+      "tokens_per_sec": 2.9,
+      "ttft_ms": 0,
+      "wall_time_sec": 65.17,
+      "conversation_length_chars": 544
+    },
+    {
+      "turn": 2,
+      "prompt": "How does it differ from deep learning?",
+      "tokens_per_sec": 2.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 81.98,
+      "conversation_length_chars": 1101
+    },
+    {
+      "turn": 3,
+      "prompt": "Can you give me an example with neural networks?",
+      "tokens_per_sec": 2.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 96.57,
+      "conversation_length_chars": 1668
+    },
+    {
+      "turn": 4,
+      "prompt": "What about transformer architecture specifically?",
+      "tokens_per_sec": 2.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 114.07,
+      "conversation_length_chars": 2236
+    },
+    {
+      "turn": 5,
+      "prompt": "How do attention mechanisms work?",
+      "tokens_per_sec": 2.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 131.49,
+      "conversation_length_chars": 2788
+    },
+    {
+      "turn": 6,
+      "prompt": "What is self-attention vs cross-attention?",
+      "tokens_per_sec": 2.8,
+      "ttft_ms": 0,
+      "wall_time_sec": 150.03,
+      "conversation_length_chars": 3349
+    },
+    {
+      "turn": 7,
+      "prompt": "Explain the concept of positional encoding.",
+      "tokens_per_sec": 2.5,
+      "ttft_ms": 0,
+      "wall_time_sec": 175.31,
+      "conversation_length_chars": 3911
+    },
+    {
+      "turn": 8,
+      "error": "Command '['llama-cli', '-m', '/models/gemma-3-27b-it-Q2_K.gguf', '--ctx-size', '4096', '--threads', '8', '--no-mmap', '--single-turn', '--prompt', 'User: What is machine learning?\\nAssistant: achine Learning?**\\n\\nAt its core, machine learning (ML) is about **teaching computers to learn from data without being explicitly programmed.**  Traditionally, you\\'d write code that *tells* a computer exactly what to do in every situation. Machine learning flips that around. Instead, you give the computer data and algorithms that *allow it to learn* patterns, make predictions, and improve its performance over time.\\n\\nThink of it like teaching\\n\\n[ Prompt: 6.8 t/s | Generation: 2.9 t/s ]\\n\\nExiting...\\n\\nUser: How does it differ from deep learning?\\nAssistant:  It uses algorithms like linear regression, logistic regression, decision trees, support vector machines, and many others. These algorithms often require *feature engineering* \u2013 meaning a human needs to identify and select the important data characteristics (features) for the algorithm to work well.  These algorithms generally work with smaller datasets.\\n\\n* **Deep Learning:** Uses artificial neural networks with *many layers* (hence \"deep\")\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: Can you give me an example with neural networks?\\nAssistant: ture Engineering:** You\\'d need to manually identify what makes a cat *a cat* to a computer.  Things like:\\n    *   Presence of whiskers\\n    *   Shape of the ears\\n    *   Ratio of head size to body size\\n    *   Color patterns\\n2.  **Algorithm:** You\\'d then feed these *hand-crafted features* into a machine learning algorithm (like a Support Vector Machine) to classify images. This algorithm learns to associate these features with the label \"cat\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: What about transformer architecture specifically?\\nAssistant: processing sequential data \u2013 things like text, speech, or even time series data.  Unlike older methods (like Recurrent Neural Networks - RNNs) which process data sequentially, Transformers rely on a mechanism called **attention**.\\n\\n**Key Concepts**\\n\\n*   **Attention:** This is the core innovation. Instead of processing words (or data points) one at a time, attention allows the model to look at *all* parts of the input sequence simultaneously\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: How do attention mechanisms work?\\nAssistant: the mat.\" To understand the word \"sat\", you don\\'t just consider *that* word in isolation. You also implicitly consider \"cat\" and \"mat\" because they give context to *where* the cat sat and *who* was doing the sitting.  Attention mechanisms try to mimic this process for computers.\\n\\n**How it Works (Simplified):**\\n\\n1. **Input Embedding:** First, each word (or data point) in the input sequence gets transformed into a vector representation called\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: What is self-attention vs cross-attention?\\nAssistant: \\n**1. Self-Attention:**\\n\\n* **What it does:**  Focuses on relationships *within* a single input sequence.  It allows the model to understand the context of each element (word, data point) in relation to all *other* elements in the *same* sequence.\\n* **Think of it as:**  \"Looking inward.\"  Each word in a sentence considers every other word in that same sentence to better understand its meaning.\\n* **Example:** In the sentence \"The animal didn\\'\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: Explain the concept of positional encoding.\\nAssistant:  it means the model needs a way to know, \"This word comes before that word.\"  That\\'s where positional encoding comes in.\\n\\n**What it is:**\\n\\n* **Adding Information About Position:** Positional encoding adds information about the position of each element (e.g., word) in the input sequence directly to its embedding. This is done by adding a vector to the embedding.\\n* **Not Learned, But Pre-defined:**  Critically, the positional encodings aren\\'t\\n\\n[ Prompt: 8.0 t/s | Generation: 2.5 t/s ]\\n\\nExiting...\\n\\nUser: How does BERT use transformers differently than GPT?\\nAssistant: ', '--n-predict', '150', '--log-disable']' timed out after 180 seconds"
+    },
+    {
+      "turn": 9,
+      "error": "Command '['llama-cli', '-m', '/models/gemma-3-27b-it-Q2_K.gguf', '--ctx-size', '4096', '--threads', '8', '--no-mmap', '--single-turn', '--prompt', 'User: What is machine learning?\\nAssistant: achine Learning?**\\n\\nAt its core, machine learning (ML) is about **teaching computers to learn from data without being explicitly programmed.**  Traditionally, you\\'d write code that *tells* a computer exactly what to do in every situation. Machine learning flips that around. Instead, you give the computer data and algorithms that *allow it to learn* patterns, make predictions, and improve its performance over time.\\n\\nThink of it like teaching\\n\\n[ Prompt: 6.8 t/s | Generation: 2.9 t/s ]\\n\\nExiting...\\n\\nUser: How does it differ from deep learning?\\nAssistant:  It uses algorithms like linear regression, logistic regression, decision trees, support vector machines, and many others. These algorithms often require *feature engineering* \u2013 meaning a human needs to identify and select the important data characteristics (features) for the algorithm to work well.  These algorithms generally work with smaller datasets.\\n\\n* **Deep Learning:** Uses artificial neural networks with *many layers* (hence \"deep\")\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: Can you give me an example with neural networks?\\nAssistant: ture Engineering:** You\\'d need to manually identify what makes a cat *a cat* to a computer.  Things like:\\n    *   Presence of whiskers\\n    *   Shape of the ears\\n    *   Ratio of head size to body size\\n    *   Color patterns\\n2.  **Algorithm:** You\\'d then feed these *hand-crafted features* into a machine learning algorithm (like a Support Vector Machine) to classify images. This algorithm learns to associate these features with the label \"cat\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: What about transformer architecture specifically?\\nAssistant: processing sequential data \u2013 things like text, speech, or even time series data.  Unlike older methods (like Recurrent Neural Networks - RNNs) which process data sequentially, Transformers rely on a mechanism called **attention**.\\n\\n**Key Concepts**\\n\\n*   **Attention:** This is the core innovation. Instead of processing words (or data points) one at a time, attention allows the model to look at *all* parts of the input sequence simultaneously\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: How do attention mechanisms work?\\nAssistant: the mat.\" To understand the word \"sat\", you don\\'t just consider *that* word in isolation. You also implicitly consider \"cat\" and \"mat\" because they give context to *where* the cat sat and *who* was doing the sitting.  Attention mechanisms try to mimic this process for computers.\\n\\n**How it Works (Simplified):**\\n\\n1. **Input Embedding:** First, each word (or data point) in the input sequence gets transformed into a vector representation called\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: What is self-attention vs cross-attention?\\nAssistant: \\n**1. Self-Attention:**\\n\\n* **What it does:**  Focuses on relationships *within* a single input sequence.  It allows the model to understand the context of each element (word, data point) in relation to all *other* elements in the *same* sequence.\\n* **Think of it as:**  \"Looking inward.\"  Each word in a sentence considers every other word in that same sentence to better understand its meaning.\\n* **Example:** In the sentence \"The animal didn\\'\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: Explain the concept of positional encoding.\\nAssistant:  it means the model needs a way to know, \"This word comes before that word.\"  That\\'s where positional encoding comes in.\\n\\n**What it is:**\\n\\n* **Adding Information About Position:** Positional encoding adds information about the position of each element (e.g., word) in the input sequence directly to its embedding. This is done by adding a vector to the embedding.\\n* **Not Learned, But Pre-defined:**  Critically, the positional encodings aren\\'t\\n\\n[ Prompt: 8.0 t/s | Generation: 2.5 t/s ]\\n\\nExiting...\\n\\nUser: How does BERT use transformers differently than GPT?\\nAssistant: User: What are the main challenges in training large language models?\\nAssistant: ', '--n-predict', '150', '--log-disable']' timed out after 180 seconds"
+    },
+    {
+      "turn": 10,
+      "error": "Command '['llama-cli', '-m', '/models/gemma-3-27b-it-Q2_K.gguf', '--ctx-size', '4096', '--threads', '8', '--no-mmap', '--single-turn', '--prompt', 'User: What is machine learning?\\nAssistant: achine Learning?**\\n\\nAt its core, machine learning (ML) is about **teaching computers to learn from data without being explicitly programmed.**  Traditionally, you\\'d write code that *tells* a computer exactly what to do in every situation. Machine learning flips that around. Instead, you give the computer data and algorithms that *allow it to learn* patterns, make predictions, and improve its performance over time.\\n\\nThink of it like teaching\\n\\n[ Prompt: 6.8 t/s | Generation: 2.9 t/s ]\\n\\nExiting...\\n\\nUser: How does it differ from deep learning?\\nAssistant:  It uses algorithms like linear regression, logistic regression, decision trees, support vector machines, and many others. These algorithms often require *feature engineering* \u2013 meaning a human needs to identify and select the important data characteristics (features) for the algorithm to work well.  These algorithms generally work with smaller datasets.\\n\\n* **Deep Learning:** Uses artificial neural networks with *many layers* (hence \"deep\")\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: Can you give me an example with neural networks?\\nAssistant: ture Engineering:** You\\'d need to manually identify what makes a cat *a cat* to a computer.  Things like:\\n    *   Presence of whiskers\\n    *   Shape of the ears\\n    *   Ratio of head size to body size\\n    *   Color patterns\\n2.  **Algorithm:** You\\'d then feed these *hand-crafted features* into a machine learning algorithm (like a Support Vector Machine) to classify images. This algorithm learns to associate these features with the label \"cat\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: What about transformer architecture specifically?\\nAssistant: processing sequential data \u2013 things like text, speech, or even time series data.  Unlike older methods (like Recurrent Neural Networks - RNNs) which process data sequentially, Transformers rely on a mechanism called **attention**.\\n\\n**Key Concepts**\\n\\n*   **Attention:** This is the core innovation. Instead of processing words (or data points) one at a time, attention allows the model to look at *all* parts of the input sequence simultaneously\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: How do attention mechanisms work?\\nAssistant: the mat.\" To understand the word \"sat\", you don\\'t just consider *that* word in isolation. You also implicitly consider \"cat\" and \"mat\" because they give context to *where* the cat sat and *who* was doing the sitting.  Attention mechanisms try to mimic this process for computers.\\n\\n**How it Works (Simplified):**\\n\\n1. **Input Embedding:** First, each word (or data point) in the input sequence gets transformed into a vector representation called\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: What is self-attention vs cross-attention?\\nAssistant: \\n**1. Self-Attention:**\\n\\n* **What it does:**  Focuses on relationships *within* a single input sequence.  It allows the model to understand the context of each element (word, data point) in relation to all *other* elements in the *same* sequence.\\n* **Think of it as:**  \"Looking inward.\"  Each word in a sentence considers every other word in that same sentence to better understand its meaning.\\n* **Example:** In the sentence \"The animal didn\\'\\n\\n[ Prompt: 8.1 t/s | Generation: 2.8 t/s ]\\n\\nExiting...\\n\\nUser: Explain the concept of positional encoding.\\nAssistant:  it means the model needs a way to know, \"This word comes before that word.\"  That\\'s where positional encoding comes in.\\n\\n**What it is:**\\n\\n* **Adding Information About Position:** Positional encoding adds information about the position of each element (e.g., word) in the input sequence directly to its embedding. This is done by adding a vector to the embedding.\\n* **Not Learned, But Pre-defined:**  Critically, the positional encodings aren\\'t\\n\\n[ Prompt: 8.0 t/s | Generation: 2.5 t/s ]\\n\\nExiting...\\n\\nUser: How does BERT use transformers differently than GPT?\\nAssistant: User: What are the main challenges in training large language models?\\nAssistant: User: Summarize everything we discussed in 3 bullet points.\\nAssistant: ', '--n-predict', '150', '--log-disable']' timed out after 180 seconds"
+    }
+  ]
+}
