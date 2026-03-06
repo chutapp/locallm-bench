@@ -1,0 +1,120 @@
+{
+  "test_environment": {
+    "platform": "Windows 11 Pro (10.0.26100)",
+    "cloud": "Azure",
+    "vm_size": "Standard_D4s_v3",
+    "cpu": "Intel Xeon Platinum 8272CL @ 2.60GHz",
+    "cores": 2,
+    "logical_processors": 4,
+    "total_ram_gb": 15.95,
+    "available_ram_after_boot_gb": 13.78,
+    "inference_engine": "Ollama 0.17.7",
+    "date": "2026-03-06",
+    "location": "eastus2"
+  },
+  "baseline_memory": {
+    "total_ram_gb": 15.95,
+    "available_after_boot_gb": 13.78,
+    "os_overhead_gb": 2.17,
+    "os_overhead_pct": 13.6,
+    "note": "Windows 11 Pro clean boot, no browser or user apps running"
+  },
+  "benchmarks": [
+    {
+      "model": "qwen3:1.7b",
+      "params": "1.7B",
+      "architecture": "Dense",
+      "quantization": "Q4_K_M (Ollama default)",
+      "test": "quick_benchmark",
+      "tokens_generated": 500,
+      "generation_tok_s": 9.66,
+      "ttft_s": 1.58,
+      "model_load_s": 5.97,
+      "total_time_s": 60.68,
+      "ram_available_after_gb": 12.06,
+      "ram_consumed_gb": 1.72,
+      "context_length": 2048,
+      "usable": true
+    },
+    {
+      "model": "glm4:9b",
+      "params": "9B",
+      "architecture": "Dense",
+      "quantization": "Q4_K_M (Ollama default)",
+      "test": "quick_benchmark",
+      "tokens_generated": 500,
+      "generation_tok_s": 2.15,
+      "prompt_processing_tok_s": 5.5,
+      "prompt_tokens": 46,
+      "ttft_s": 8.37,
+      "model_load_s": 6.07,
+      "total_time_s": 248.69,
+      "ram_available_before_gb": 13.79,
+      "ram_available_after_gb": 8.51,
+      "ram_consumed_gb": 5.28,
+      "context_length": 2048,
+      "usable": false,
+      "note": "Below 5 tok/s usability threshold"
+    },
+    {
+      "model": "mistral-small:24b",
+      "params": "24B",
+      "architecture": "Dense",
+      "quantization": "Q4_K_M (Ollama default, 14GB model)",
+      "test": "quick_benchmark",
+      "tokens_generated": 500,
+      "generation_tok_s": 0.97,
+      "prompt_processing_tok_s": 1.69,
+      "prompt_tokens": 201,
+      "ttft_s": 118.84,
+      "model_load_s": 70.36,
+      "total_time_s": 707.08,
+      "ram_available_before_gb": 13.83,
+      "ram_available_after_gb": 0.65,
+      "ram_consumed_gb": 13.18,
+      "context_length": 2048,
+      "usable": false,
+      "note": "Essentially all RAM consumed, nearly swapping"
+    },
+    {
+      "model": "glm4:9b",
+      "params": "9B",
+      "architecture": "Dense",
+      "quantization": "Q4_K_M (Ollama default)",
+      "test": "concurrent_load",
+      "tokens_generated": 300,
+      "generation_tok_s": 1.46,
+      "context_length": 2048,
+      "cpu_stress_threads": 2,
+      "speed_drop_pct": 32.1,
+      "note": "2 CPU stress threads simulating browser/apps background load"
+    },
+    {
+      "model": "glm4:9b",
+      "params": "9B",
+      "architecture": "Dense",
+      "quantization": "Q4_K_M (Ollama default)",
+      "test": "multi_turn",
+      "context_length": 2048,
+      "tokens_per_turn": 150,
+      "turns": [
+        { "turn": 1, "generation_tok_s": 2.31, "ttft_s": 1.60 },
+        { "turn": 2, "generation_tok_s": 2.29, "ttft_s": 2.69 },
+        { "turn": 3, "generation_tok_s": 2.23, "ttft_s": 2.18 },
+        { "turn": 4, "generation_tok_s": 2.18, "ttft_s": 2.72 },
+        { "turn": 5, "generation_tok_s": 2.17, "ttft_s": 2.70 }
+      ],
+      "speed_degradation_turn1_to_5_pct": 6.1,
+      "note": "Gradual degradation as context grows"
+    }
+  ],
+  "key_findings": {
+    "windows_os_overhead_gb": 2.17,
+    "windows_vs_linux_available_ram": "13.78 GB vs ~15.5 GB (Linux best case)",
+    "ram_penalty_pct": 11.1,
+    "concurrent_load_impact": "32% speed drop with 2 stress threads (vs 0-5% on Linux)",
+    "mistral_small_24b": "Essentially unusable on Windows — 0.97 tok/s, consumes all RAM",
+    "glm4_9b": "Below usability at 2.15 tok/s, but stable",
+    "note": "These are NOT the same models as our Linux MoE tests. Ollama does not have GLM-4.7-Flash 30B MoE. The glm4:9b is a different, smaller dense model. Direct Linux vs Windows comparison requires running the same GGUF files through llama.cpp on both platforms."
+  }
+}
