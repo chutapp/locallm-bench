@@ -8,7 +8,8 @@
     "logical_processors": 4,
     "total_ram_gb": 15.95,
     "available_ram_after_boot_gb": 13.78,
-    "inference_engine": "Ollama 0.17.7",
+    "inference_engine_ollama": "Ollama 0.17.7",
+    "inference_engine_llamacpp": "llama.cpp (latest, built from source)",
     "date": "2026-03-06",
     "location": "eastus2"
   },
@@ -108,13 +109,49 @@
       "note": "Gradual degradation as context grows"
     }
   ],
+    {
+      "model": "GLM-4.7-Flash (30B MoE, 3B active)",
+      "params": "30B",
+      "architecture": "MoE",
+      "quantization": "Q2_K",
+      "gguf_size_gb": 10.57,
+      "inference_engine": "llama.cpp (built from source)",
+      "test": "quick_benchmark",
+      "tokens_requested": 500,
+      "context_length": 2048,
+      "outcome": "THRASH",
+      "generation_tok_s": null,
+      "note": "Model loaded but generation never completed. 10.57 GB model + Windows overhead (~2.2 GB) + KV cache leaves no headroom. The process ran for 30+ minutes without producing output. Even a 50-token test with ctx=512 could not complete. On Linux with 15.5 GB available this same model runs at 7.2 tok/s. Windows memory pressure from OS services + NTFS overhead makes it completely unusable.",
+      "linux_comparison": {
+        "same_model_linux_tok_s": 7.2,
+        "linux_available_ram_gb": 15.5,
+        "linux_outcome": "FITS",
+        "verdict": "GLM-4.7-Flash Q2_K works on Linux 16GB but is completely unusable on Windows 16GB"
+      }
+    },
+    {
+      "model": "GLM-4.7-Flash (30B MoE, 3B active)",
+      "params": "30B",
+      "architecture": "MoE",
+      "quantization": "Q2_K",
+      "gguf_size_gb": 10.57,
+      "inference_engine": "llama.cpp (built from source)",
+      "test": "quick_benchmark_50tok",
+      "tokens_requested": 50,
+      "context_length": 512,
+      "outcome": "THRASH",
+      "generation_tok_s": null,
+      "note": "Even with minimal context (512) and only 50 tokens requested, the model could not complete generation in 30+ minutes. Confirmed thrashing."
+    }
+  ],
   "key_findings": {
     "windows_os_overhead_gb": 2.17,
     "windows_vs_linux_available_ram": "13.78 GB vs ~15.5 GB (Linux best case)",
     "ram_penalty_pct": 11.1,
     "concurrent_load_impact": "32% speed drop with 2 stress threads (vs 0-5% on Linux)",
+    "glm47flash_30b_moe": "COMPLETELY UNUSABLE on Windows. Same model that runs at 7.2 tok/s on Linux cannot complete even 50 tokens on Windows 16GB. The 10.57 GB GGUF + 2.2 GB Windows overhead + KV cache pushes past available RAM, causing disk thrashing.",
     "mistral_small_24b": "Essentially unusable on Windows — 0.97 tok/s, consumes all RAM",
     "glm4_9b": "Below usability at 2.15 tok/s, but stable",
-    "note": "These are NOT the same models as our Linux MoE tests. Ollama does not have GLM-4.7-Flash 30B MoE. The glm4:9b is a different, smaller dense model. Direct Linux vs Windows comparison requires running the same GGUF files through llama.cpp on both platforms."
+    "bottom_line": "On Windows 16GB, only models under ~8 GB GGUF size are viable. The MoE advantage that makes GLM-4.7-Flash our Linux winner is nullified by Windows memory overhead. Users on Windows 16GB are limited to 7-9B dense models at best."
   }
 }
