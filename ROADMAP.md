@@ -1,51 +1,85 @@
 # Roadmap
 
-## Phase 1: Fix & Complete
+## Phase 1: Complete v1
 
-The v1 benchmarks have gaps. These need fixing before we build on top.
+Fix the gaps in our first round of experiments. Nothing else makes sense until these are solid.
 
-1. **Re-run context scaling** — test all passing models at ctx 512/1K/2K/4K/8K. The dedup bug in the orchestrator skipped everything after ctx 512. Fix the bug, re-run.
-2. **Fix perplexity extraction** — the logs exist on the servers, the parser just didn't extract the scores. Pull the raw logs, parse WikiText-2 perplexity, backfill the quality JSON files.
-3. **Debug Falcon-H1R & BitNet** — zero results from either model. Figure out if it was a download failure, engine incompatibility, or something else. Get them running.
-4. **Install & benchmark llamafile** — proper head-to-head comparison vs llama.cpp on the same models, same hardware.
-5. **Analyze bench-3 llamafile data** — there are already some llamafile results in the bench-3 data. Include them in the published analysis.
+- [ ] Fix the context scaling dedup bug in `orchestrator.sh`
+- [ ] Re-run context scaling on all passing models (ctx 512 / 1K / 2K / 4K / 8K)
+- [ ] Pull raw perplexity logs from the servers and parse WikiText-2 scores
+- [ ] Backfill quality JSON files with extracted perplexity data
+- [ ] Analyze the llamafile results already collected on bench-3
+- [ ] Debug Falcon-H1R-7B — figure out if it was a download failure or engine issue
+- [ ] Debug BitNet 2B4T — check if bitnet.cpp was installed, get it running
+- [ ] Publish updated analysis with the fixed data
 
-## Phase 2: Optimization Experiments
+## Phase 2: Engine & Quantization Comparison
 
-We know GLM-4.7-Flash works. Can we make it faster?
+Test whether different engines or quantization methods change the picture.
 
-6. **Speculative decoding** — pair a small draft model (Qwen3-0.6B or similar) with GLM-4.7-Flash. Measure the actual speedup on 16GB hardware.
-7. **Unsloth Dynamic 2.0 quants** — test adaptive per-layer quantization. Compare output quality against uniform Q2_K at the same file size.
-8. **KV cache quantization** — run GLM with `--cache-type-k q4_0 --cache-type-v q4_0`. See if the freed RAM lets us use Q3_K_M without OOM.
-9. **Combined stack** — speculative decoding + KV cache quant + best quantization together. What's the actual ceiling on 16GB?
+- [ ] Install llamafile on a test server, run head-to-head vs llama.cpp on the same models
+- [ ] Test i-quants (IQ4_XS, IQ3_M) — reportedly beat standard quants at smaller size
+- [ ] Test Unsloth Dynamic 2.0 adaptive per-layer quantization on GLM-4.7-Flash
+- [ ] Compare i-quant and Dynamic 2.0 quality against uniform Q2_K at the same file size
+- [ ] Test KV cache quantization (`--cache-type-k q4_0 --cache-type-v q4_0`) — does freed RAM let us use Q3_K_M without OOM?
 
-## Phase 3: Real-World Task Benchmarks
+## Phase 3: Speed Optimization
 
-Speed without quality data is half the story. We need to test whether these models can do useful work at aggressive quantization levels.
+Push the winner (GLM-4.7-Flash) further. Can we get from 7 tok/s to 12+?
 
-10. **RAG (Retrieval-Augmented Generation)** — build a test set: 5 documents (1-3 pages each), 20 questions with known answers. Score accuracy at each quant level. Test with 2K and 4K context windows. This is the killer use case for local LLMs — private docs, no cloud.
-11. **Code assistant** — 10 real code tasks (explain, refactor, debug, complete). Score correctness. Measure TTFT since that's what developers actually feel when they hit Enter.
-12. **Summarization** — 10 long texts (emails, articles, meeting notes). Compare generated summaries against reference summaries. This tests prompt processing speed with 2K+ token inputs.
-13. **Data extraction** — 10 invoices and forms, extract structured JSON output. Measure field-level accuracy. The question: does Q2_K hallucinate field values?
-14. **Multi-turn chat** — 20-turn realistic conversations (not ML trivia). Measure output quality degradation alongside the speed degradation we already captured.
+- [ ] Test speculative decoding with a small draft model (Qwen3-0.6B or similar) paired with GLM-4.7-Flash
+- [ ] Measure speculative decoding speedup at different draft lengths
+- [ ] Combine the best from Phase 2 + speculative decoding — what's the actual ceiling on 16GB?
+- [ ] Test any new MoE models released since v1 (SmallThinker-21B, newer GLM, etc.)
 
-## Phase 4: Real Hardware & User Profiles
+## Phase 4: Real-World Task Benchmarks
 
-Our EPYC servers have good memory bandwidth. Real consumer PCs will be slower.
+Speed alone doesn't tell us if the output is useful. Test actual tasks people would run locally.
 
-15. **Test on actual consumer hardware** — cheap Dell or Lenovo with DDR4, AMD Ryzen 5, 16GB RAM. How much worse is it compared to EPYC?
-16. **Build user profiles** — map use cases to recommended configurations:
-    - "Developer, 16GB, wants code help" -> model X, quant Y, engine Z
-    - "Lawyer, 16GB, needs private doc Q&A" -> model X, quant Y, RAG setup
-    - "Student, 8GB laptop" -> what's possible at all?
-17. **Test 8GB configurations** — a big chunk of the audience has 8GB machines. What (if anything) works there?
+### RAG (Private Document Q&A)
+- [ ] Build a test set: 5 documents (1-3 pages each), 20 questions with known answers
+- [ ] Score answer accuracy at each quant level (Q2_K, Q3_K_M, i-quants, Dynamic 2.0)
+- [ ] Test at 2K and 4K context windows
+- [ ] Measure how RAG context length affects speed and quality together
 
-## Phase 5: Ship It
+### Code Assistant
+- [ ] Create 10 real code tasks (explain, refactor, debug, complete)
+- [ ] Score correctness of outputs
+- [ ] Measure TTFT — that's what developers feel when they hit Enter
 
-18. **One-command installer** — detect hardware, download the right model, configure everything automatically.
-19. **Recommendation CLI** — input your specs, get back your best setup with expected performance numbers.
-20. **Publish updated findings** — revised paper with task benchmarks and optimization results.
+### Summarization
+- [ ] Collect 10 long texts (emails, articles, meeting notes)
+- [ ] Generate summaries, compare against reference summaries
+- [ ] Measure prompt processing speed with 2K+ token inputs
 
-## Priority
+### Data Extraction
+- [ ] Collect 10 invoices and forms
+- [ ] Extract structured JSON, measure field-level accuracy
+- [ ] Answer the question: does Q2_K hallucinate field values?
 
-Phase 1 first (fixes credibility). Then Phase 3 items 10-11 in parallel with Phase 2 items 6-7 — these answer the two biggest open questions: "is it actually useful?" and "can we make it faster?" Phase 4 when we have clear winners. Phase 5 when we have a story worth shipping.
+### Multi-Turn Chat
+- [ ] Run 20-turn realistic conversations (not ML trivia)
+- [ ] Measure output quality degradation alongside speed degradation
+- [ ] Compare quality at turn 1 vs turn 10 vs turn 20
+
+## Phase 5: Real Hardware & User Profiles
+
+Our EPYC servers have better memory bandwidth than most consumer PCs. Validate on real hardware.
+
+- [ ] Test on a budget consumer PC (DDR4, AMD Ryzen 5 or Intel i5, 16GB)
+- [ ] Measure the gap vs EPYC — how much slower is real consumer hardware?
+- [ ] Test 8GB configurations — what (if anything) is usable for the 8GB crowd?
+- [ ] Test AMD Ryzen AI / NPU acceleration if available
+- [ ] Build user profiles mapping use cases to recommended setups:
+  - [ ] Developer, 16GB — code assistant config
+  - [ ] Lawyer / journalist, 16GB — private document Q&A config
+  - [ ] Student, 8GB laptop — what's possible
+  - [ ] Offline / air-gapped user — full self-contained setup
+
+## Phase 6: Ship It
+
+- [ ] Build a one-command installer that detects hardware and sets up the right model
+- [ ] Build a recommendation CLI — input specs, get back best setup with expected performance
+- [ ] Submit results to LocalScore for community visibility
+- [ ] Publish updated paper with task benchmarks and optimization results
+- [ ] Write up findings as blog posts for broader reach
