@@ -1,9 +1,10 @@
 # Roadmap
 
-## Phase 1: Complete v1
+## Phase 1: Complete v1 & Cross-Platform
 
-Fix the gaps in our first round of experiments. Nothing else makes sense until these are solid.
+Fix the gaps from our first round and test on the OS most people actually use.
 
+### v1 Fixes
 - [ ] Fix the context scaling dedup bug in `orchestrator.sh`
 - [ ] Re-run context scaling on all passing models (ctx 512 / 1K / 2K / 4K / 8K)
 - [ ] Pull raw perplexity logs from the servers and parse WikiText-2 scores
@@ -11,7 +12,24 @@ Fix the gaps in our first round of experiments. Nothing else makes sense until t
 - [ ] Analyze the llamafile results already collected on bench-3
 - [ ] Debug Falcon-H1R-7B — figure out if it was a download failure or engine issue
 - [ ] Debug BitNet 2B4T — check if bitnet.cpp was installed, get it running
-- [ ] Publish updated analysis with the fixed data
+
+### Windows Testing (priority — most users run Windows)
+- [ ] Set up a Windows 10/11 test environment with 16GB RAM (real hardware or Azure/AWS VM)
+- [ ] Measure actual available RAM after Windows + typical background apps (browser, antivirus, services)
+- [ ] Run the same top models from v1 (GLM-4.7-Flash Q2_K/Q3_K_M, Mistral-Small Q2_K, Ministral Q4_K_M)
+- [ ] Test through tools real users use: Ollama, LM Studio, GPT4All — not just raw llama-cli
+- [ ] Compare Windows vs Linux performance on identical hardware
+- [ ] Measure model loading time on NTFS vs ext4
+- [ ] Test with a browser + typical apps running (real user scenario, not clean boot)
+- [ ] Document the Windows-specific setup and gotchas
+
+### macOS Testing
+- [ ] Test on an Intel Mac with 16GB (not Apple Silicon — that's a different story with unified memory)
+- [ ] Test through Ollama and LM Studio on macOS
+
+### Publish
+- [ ] Updated analysis covering all three operating systems
+- [ ] OS comparison table: same model, same hardware, Linux vs Windows vs macOS
 
 ## Phase 2: Engine & Quantization Comparison
 
@@ -22,6 +40,7 @@ Test whether different engines or quantization methods change the picture.
 - [ ] Test Unsloth Dynamic 2.0 adaptive per-layer quantization on GLM-4.7-Flash
 - [ ] Compare i-quant and Dynamic 2.0 quality against uniform Q2_K at the same file size
 - [ ] Test KV cache quantization (`--cache-type-k q4_0 --cache-type-v q4_0`) — does freed RAM let us use Q3_K_M without OOM?
+- [ ] Test engine performance differences across operating systems (does llamafile close the gap on Windows?)
 
 ## Phase 3: Speed Optimization
 
@@ -62,24 +81,32 @@ Speed alone doesn't tell us if the output is useful. Test actual tasks people wo
 - [ ] Measure output quality degradation alongside speed degradation
 - [ ] Compare quality at turn 1 vs turn 10 vs turn 20
 
+### Cross-Platform Task Comparison
+- [ ] Run all task benchmarks on Windows and Linux
+- [ ] Check if task quality differs across OS (it shouldn't, but verify)
+- [ ] Measure TTFT and throughput differences per OS per task
+
 ## Phase 5: Real Hardware & User Profiles
 
 Our EPYC servers have better memory bandwidth than most consumer PCs. Validate on real hardware.
 
-- [ ] Test on a budget consumer PC (DDR4, AMD Ryzen 5 or Intel i5, 16GB)
+- [ ] Test on a budget consumer PC (DDR4, AMD Ryzen 5 or Intel i5, 16GB, Windows 11)
+- [ ] Test on a budget consumer PC running Linux for direct comparison
 - [ ] Measure the gap vs EPYC — how much slower is real consumer hardware?
 - [ ] Test 8GB configurations — what (if anything) is usable for the 8GB crowd?
+- [ ] Test 8GB on Windows specifically — after OS overhead, is anything left?
 - [ ] Test AMD Ryzen AI / NPU acceleration if available
 - [ ] Build user profiles mapping use cases to recommended setups:
-  - [ ] Developer, 16GB — code assistant config
-  - [ ] Lawyer / journalist, 16GB — private document Q&A config
-  - [ ] Student, 8GB laptop — what's possible
-  - [ ] Offline / air-gapped user — full self-contained setup
+  - [ ] Developer on Windows, 16GB — code assistant config
+  - [ ] Developer on Linux, 16GB — code assistant config
+  - [ ] Lawyer / journalist on Windows, 16GB — private document Q&A config
+  - [ ] Student on Windows, 8GB laptop — what's possible
+  - [ ] Offline / air-gapped user — full self-contained setup per OS
 
 ## Phase 6: Ship It
 
-- [ ] Build a one-command installer that detects hardware and sets up the right model
-- [ ] Build a recommendation CLI — input specs, get back best setup with expected performance
+- [ ] Build a one-command installer per OS (bash for Linux/macOS, PowerShell for Windows)
+- [ ] Build a recommendation CLI — input specs + OS, get back best setup with expected performance
 - [ ] Submit results to LocalScore for community visibility
-- [ ] Publish updated paper with task benchmarks and optimization results
+- [ ] Publish updated paper with cross-platform task benchmarks and optimization results
 - [ ] Write up findings as blog posts for broader reach
