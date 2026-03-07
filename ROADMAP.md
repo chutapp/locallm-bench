@@ -1,112 +1,102 @@
 # Roadmap
 
-## Phase 1: Complete v1 & Cross-Platform
+## Status of What's Done
 
-Fix the gaps from our first round and test on the OS most people actually use.
+### Completed (Phase 1 — Linux on Server Hardware)
+- [x] 150 experiments on 3 Hetzner servers (EPYC Milan/Rome, 16GB, no swap)
+- [x] 10 models, 5 quantization levels, 3 memory tiers
+- [x] 7 test types: quick bench, context scaling, stability, multi-turn, concurrent, quality, recovery
+- [x] Finding: GLM-4.7-Flash 30B MoE at Q2_K = 7.2 tok/s — only model above 5 tok/s
+- [x] Finding: MoE is the only viable architecture for 30B+ on 16GB
+- [x] Paper and raw data published
 
-### v1 Fixes
-- [ ] Fix the context scaling dedup bug in `orchestrator.sh`
-- [ ] Re-run context scaling on all passing models (ctx 512 / 1K / 2K / 4K / 8K)
-- [ ] Pull raw perplexity logs from the servers and parse WikiText-2 scores
-- [ ] Backfill quality JSON files with extracted perplexity data
-- [ ] Analyze the llamafile results already collected on bench-3
-- [ ] Debug Falcon-H1R-7B — figure out if it was a download failure or engine issue
-- [ ] Debug BitNet 2B4T — check if bitnet.cpp was installed, get it running
+### Completed (Exploratory — Windows on Different Hardware)
+- [x] Windows 11 OS overhead measured: 2.17 GB
+- [x] 9 small models tested via Ollama on Azure D4s_v3 (Xeon 8272CL)
+- [x] GLM-4.7-Flash 30B confirmed thrashing on Windows+Xeon combo
+- [x] Data labeled as exploratory (different CPU, different engine — not comparable to Linux results)
 
-### Windows Testing (priority — most users run Windows)
-- [ ] Set up a Windows 10/11 test environment with 16GB RAM (real hardware or Azure/AWS VM)
-- [ ] Measure actual available RAM after Windows + typical background apps (browser, antivirus, services)
-- [ ] Run the same top models from v1 (GLM-4.7-Flash Q2_K/Q3_K_M, Mistral-Small Q2_K, Ministral Q4_K_M)
-- [ ] Test through tools real users use: Ollama, LM Studio, GPT4All — not just raw llama-cli
-- [ ] Compare Windows vs Linux performance on identical hardware
-- [ ] Measure model loading time on NTFS vs ext4
-- [ ] Test with a browser + typical apps running (real user scenario, not clean boot)
-- [ ] Document the Windows-specific setup and gotchas
+### Known Bugs from Phase 1
+- [ ] Context scaling dedup bug — only ctx=512 tested for most models
+- [ ] Perplexity parser broken — all WikiText-2 scores came back null
+- [ ] Falcon-H1R-7B and BitNet 2B4T produced no results
+- [ ] bench-3 alternative engines (llamafile, bitnet.cpp, PowerInfer) not installed
 
-### macOS Testing
-- [ ] Test on an Intel Mac with 16GB (not Apple Silicon — that's a different story with unified memory)
-- [ ] Test through Ollama and LM Studio on macOS
+---
 
-### Publish
-- [ ] Updated analysis covering all three operating systems
-- [ ] OS comparison table: same model, same hardware, Linux vs Windows vs macOS
+## Phase 2: Fix Phase 1 Gaps
 
-## Phase 2: Engine & Quantization Comparison
+Low-cost fixes using existing infrastructure.
+
+- [ ] Fix context scaling dedup bug in `orchestrator.sh`
+- [ ] Re-run context scaling on passing models (ctx 512 / 1K / 2K / 4K / 8K)
+- [ ] Pull raw perplexity logs and fix the parser regex
+- [ ] Debug Falcon-H1R-7B and BitNet 2B4T failures
+- [ ] Analyze any llamafile results already collected on bench-3
+
+## Phase 3: Cross-OS Comparison (Same Hardware)
+
+**Why**: We cannot make any Linux vs Windows speed claims without testing both on identical hardware with the same engine and same models. This is the most important gap.
+
+**Approach**: Use a single cloud VM type that offers both Linux and Windows images.
+
+- [ ] Provision two Azure D4s_v3 VMs (or equivalent): one Ubuntu, one Windows 11
+- [ ] Install Ollama on both (same version, same engine)
+- [ ] Run identical test suite: same 9+ models, same prompts, same config (300 tokens, ctx 2048, temp 0.7, seed 42)
+- [ ] Also test GLM-4.7-Flash 30B via llama.cpp on both
+- [ ] Measure: generation tok/s, prompt tok/s, TTFT, model load time, RAM consumed
+- [ ] Publish results with honest comparison — the Xeon 8272CL is a 2019 server CPU, so this tells us the OS delta on old hardware, not what consumers get
+- [ ] Delete both VMs when done (estimated cost: ~$2-4)
+
+**What this will answer**: The exact speed penalty of Windows vs Linux on identical (server) hardware.
+
+**What this will NOT answer**: Consumer performance. That requires Phase 4.
+
+## Phase 4: Consumer Hardware Validation
+
+**Why**: Our EPYC Milan (2.0 GHz) has lower single-thread than consumer CPUs (i5-13400, Ryzen 5 7600). We need to verify our results hold and measure the speed difference.
+
+**Options** (in order of preference):
+1. **Hetzner AX42 dedicated server** — Ryzen 7 PRO 8700GE, ~105 single-thread score, genuinely consumer-representative. Run Linux tests, compare to EPYC results. ~EUR 50/month, need a few hours.
+2. **Physical hardware** — Borrow or buy a budget 16GB PC (i5-13400 + DDR4). Run both Linux and Windows. Most realistic but requires physical access.
+3. **Cloud gaming / remote desktop** — Services like Shadow PC provide consumer-grade hardware (Ryzen, GeForce). Could test Windows on real consumer CPU. Availability and cost varies.
+
+- [ ] Choose approach and provision hardware
+- [ ] Run same test suite as Phase 1 (all models that fit, all quant levels)
+- [ ] Compare to EPYC results — measure the actual speed gap
+- [ ] If using dual-boot or two machines: run same tests on Windows for true consumer cross-OS comparison
+- [ ] Publish updated paper with consumer-validated numbers
+
+## Phase 5: Engine & Quantization Comparison
 
 Test whether different engines or quantization methods change the picture.
 
-- [ ] Install llamafile on a test server, run head-to-head vs llama.cpp on the same models
+- [ ] llamafile head-to-head vs llama.cpp on same models
 - [ ] Test i-quants (IQ4_XS, IQ3_M) — reportedly beat standard quants at smaller size
 - [ ] Test Unsloth Dynamic 2.0 adaptive per-layer quantization on GLM-4.7-Flash
-- [ ] Compare i-quant and Dynamic 2.0 quality against uniform Q2_K at the same file size
-- [ ] Test KV cache quantization (`--cache-type-k q4_0 --cache-type-v q4_0`) — does freed RAM let us use Q3_K_M without OOM?
-- [ ] Test engine performance differences across operating systems (does llamafile close the gap on Windows?)
+- [ ] Test KV cache quantization (`--cache-type-k q4_0 --cache-type-v q4_0`)
+- [ ] Test Ollama vs llama.cpp on Linux (quantify the convenience vs speed tradeoff)
 
-## Phase 3: Speed Optimization
+## Phase 6: Speed Optimization
 
-Push the winner (GLM-4.7-Flash) further. Can we get from 7 tok/s to 12+?
+Push the winner (GLM-4.7-Flash) further.
 
-- [ ] Test speculative decoding with a small draft model (Qwen3-0.6B or similar) paired with GLM-4.7-Flash
-- [ ] Measure speculative decoding speedup at different draft lengths
-- [ ] Combine the best from Phase 2 + speculative decoding — what's the actual ceiling on 16GB?
-- [ ] Test any new MoE models released since v1 (SmallThinker-21B, newer GLM, etc.)
+- [ ] Test speculative decoding with a small draft model paired with GLM-4.7-Flash
+- [ ] Combine best quantization + speculative decoding — what's the ceiling on 16GB?
+- [ ] Test any new MoE models released since Phase 1
 
-## Phase 4: Real-World Task Benchmarks
+## Phase 7: Real-World Task Benchmarks
 
-Speed alone doesn't tell us if the output is useful. Test actual tasks people would run locally.
+Speed alone doesn't tell us if the output is useful.
 
-### RAG (Private Document Q&A)
-- [ ] Build a test set: 5 documents (1-3 pages each), 20 questions with known answers
-- [ ] Score answer accuracy at each quant level (Q2_K, Q3_K_M, i-quants, Dynamic 2.0)
-- [ ] Test at 2K and 4K context windows
-- [ ] Measure how RAG context length affects speed and quality together
+- [ ] RAG: 5 documents, 20 questions with known answers, score accuracy per quant level
+- [ ] Code assistant: 10 real tasks, score correctness, measure TTFT
+- [ ] Summarization: 10 long texts, compare against reference summaries
+- [ ] Multi-turn chat: 20 turns, measure quality + speed degradation together
 
-### Code Assistant
-- [ ] Create 10 real code tasks (explain, refactor, debug, complete)
-- [ ] Score correctness of outputs
-- [ ] Measure TTFT — that's what developers feel when they hit Enter
+## Phase 8: Ship It
 
-### Summarization
-- [ ] Collect 10 long texts (emails, articles, meeting notes)
-- [ ] Generate summaries, compare against reference summaries
-- [ ] Measure prompt processing speed with 2K+ token inputs
-
-### Data Extraction
-- [ ] Collect 10 invoices and forms
-- [ ] Extract structured JSON, measure field-level accuracy
-- [ ] Answer the question: does Q2_K hallucinate field values?
-
-### Multi-Turn Chat
-- [ ] Run 20-turn realistic conversations (not ML trivia)
-- [ ] Measure output quality degradation alongside speed degradation
-- [ ] Compare quality at turn 1 vs turn 10 vs turn 20
-
-### Cross-Platform Task Comparison
-- [ ] Run all task benchmarks on Windows and Linux
-- [ ] Check if task quality differs across OS (it shouldn't, but verify)
-- [ ] Measure TTFT and throughput differences per OS per task
-
-## Phase 5: Real Hardware & User Profiles
-
-Our EPYC servers have better memory bandwidth than most consumer PCs. Validate on real hardware.
-
-- [ ] Test on a budget consumer PC (DDR4, AMD Ryzen 5 or Intel i5, 16GB, Windows 11)
-- [ ] Test on a budget consumer PC running Linux for direct comparison
-- [ ] Measure the gap vs EPYC — how much slower is real consumer hardware?
-- [ ] Test 8GB configurations — what (if anything) is usable for the 8GB crowd?
-- [ ] Test 8GB on Windows specifically — after OS overhead, is anything left?
-- [ ] Test AMD Ryzen AI / NPU acceleration if available
-- [ ] Build user profiles mapping use cases to recommended setups:
-  - [ ] Developer on Windows, 16GB — code assistant config
-  - [ ] Developer on Linux, 16GB — code assistant config
-  - [ ] Lawyer / journalist on Windows, 16GB — private document Q&A config
-  - [ ] Student on Windows, 8GB laptop — what's possible
-  - [ ] Offline / air-gapped user — full self-contained setup per OS
-
-## Phase 6: Ship It
-
-- [ ] Build a one-command installer per OS (bash for Linux/macOS, PowerShell for Windows)
-- [ ] Build a recommendation CLI — input specs + OS, get back best setup with expected performance
-- [ ] Submit results to LocalScore for community visibility
-- [ ] Publish updated paper with cross-platform task benchmarks and optimization results
-- [ ] Write up findings as blog posts for broader reach
+- [ ] One-command installer per OS (bash for Linux/macOS, PowerShell for Windows)
+- [ ] Recommendation CLI — input specs + OS, get back best setup
+- [ ] Updated paper covering all platforms and consumer hardware
+- [ ] Blog posts for broader reach

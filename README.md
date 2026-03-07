@@ -1,12 +1,14 @@
 # Can You Run a 30B LLM on 16GB RAM? We Tested It.
 
-**150 experiments. 10 models. 3 servers. No GPU. Here's what actually works.**
+**150 experiments. 10 models. 3 Linux servers. No GPU. Here's what actually works.**
 
-We wanted to know if a regular 16GB PC — the kind most people own — can run large language models locally without a GPU. Not marketing benchmarks, not "it technically loads." We mean: can you actually have a conversation with it?
+We wanted to know if 16GB of RAM — the amount most PCs ship with — is enough to run large language models locally without a GPU. Not marketing benchmarks, not "it technically loads." We mean: can you actually have a conversation with it?
 
 We rented three Hetzner Cloud servers with 4-core AMD EPYC CPUs and 16GB RAM (no swap, no GPU), downloaded every promising open-weight model we could find, quantized them to various levels, and ran them through a gauntlet of real-world tests.
 
 The short answer: **one model crosses the usability line.** The rest are too slow or too big.
+
+> **Read this first**: We tested on **Linux only**, on **server-grade EPYC CPUs** (2.0 GHz, no boost). Consumer CPUs (i5-13400, Ryzen 5 7600) clock higher and would probably be faster — our numbers are a floor, not a prediction. We haven't tested on Windows or consumer hardware yet. See [Limitations](#limitations) and [PAPER.md](PAPER.md).
 
 ---
 
@@ -22,9 +24,10 @@ The short answer: **one model crosses the usability line.** The rest are too slo
 | Mistral-Small-24B | Dense | 24B | Q3_K_M | 3.3 | 7.6 GB | No |
 | Gemma-3-27B | Dense | 27B | Q2_K | 3.0 | 11.3 GB | No |
 | DeepSeek-R1-32B | Dense | 32B | Q2_K | 2.8 | 12.4 GB | No |
-| Gemma-3-27B | Dense | 27B | Q3_K_M | 2.4 | 9.4 GB | No |
 
 **Usability threshold**: >5 tokens/sec with <5 second time-to-first-token.
+
+**Hardware**: AMD EPYC Milan, 4 dedicated cores, 16GB RAM, Ubuntu 24.04, llama.cpp. See [Methodology](#methodology) for details.
 
 Full results (all 150 experiments as JSON): [`results/`](results/)
 
@@ -34,7 +37,7 @@ Full results (all 150 experiments as JSON): [`results/`](results/)
 
 ### 1. MoE models are the only path to 30B+ on 16GB
 
-GLM-4.7-Flash has 30 billion total parameters but only activates 3 billion per token. This is the only architecture that crossed our 5 tok/s usability threshold. Dense models of similar size are 2-3x slower because they touch every parameter on every token.
+GLM-4.7-Flash has 30 billion total parameters but only activates 3 billion per token. This is the only architecture that crossed our 5 tok/s usability threshold. Dense models of similar size are 2-3x slower because they touch every parameter on every token. This is about architecture, not clock speed — it should hold on any CPU.
 
 ### 2. Even MoE needs aggressive quantization
 
@@ -67,13 +70,15 @@ Running `stress --cpu 2` alongside inference (simulating a browser and other app
 
 ### Hardware
 
-Three Hetzner Cloud servers, deliberately chosen to match typical consumer PCs:
+Three Hetzner Cloud servers:
 
 | Server | CPU | Cores | RAM | Swap | GPU |
 |--------|-----|-------|-----|------|-----|
 | bench-1 | AMD EPYC Milan | 4 dedicated | 16 GB | None | None |
 | bench-2 | AMD EPYC Milan | 4 dedicated | 16 GB | None | None |
 | bench-3 | AMD EPYC Rome | 8 shared | 16 GB | None | None |
+
+**About the CPUs**: EPYC Milan in these VMs runs at ~2.0 GHz, no boost. Desktop CPUs like the i5-13400 (4.6 GHz boost) or Ryzen 5 7600 (5.1 GHz boost) are quite a bit faster per-thread. Our tok/s numbers are a lower bound — consumer hardware should do better, but we haven't measured how much yet.
 
 No swap on any server. If a model doesn't fit, the process gets OOM-killed. Honest results.
 
@@ -85,12 +90,12 @@ No swap on any server. If a model doesn't fit, the process gets OOM-killed. Hone
 
 ### Memory tiers
 
-We tested each model at three simulated memory limits to see how they perform when the OS and other apps take some RAM:
+We tested each model at three simulated memory limits to see how they perform under different system load:
 
 | Tier | Available RAM | Simulates |
 |------|--------------|-----------|
-| 12 GB | Windows user with browser + apps |
-| 14 GB | Linux user, light usage |
+| 12 GB | Significant background usage |
+| 14 GB | Light background usage |
 | 15.5 GB | Best case, almost nothing running |
 
 Enforced via `systemd-run --scope -p MemoryMax=XG`.
@@ -110,6 +115,24 @@ Total: **150 experiments**, each producing a structured JSON file with ~70 data 
 ### What we measured per experiment
 
 Every run captured: tokens/sec (generation and prompt processing), time-to-first-token, inter-token latency stats, peak RSS, virtual memory, model load time, CPU utilization, disk I/O, page faults, and more. See [`docs/metrics.md`](docs/metrics.md) for the complete list.
+
+---
+
+## Limitations
+
+Real gaps in our data:
+
+1. **Server CPUs, not consumer CPUs.** EPYC Milan at 2.0 GHz is slower per-thread than desktop i5/Ryzen 5. Our speeds are a floor, not a ceiling. Consumer validation is needed.
+
+2. **Linux only.** All tests ran on Ubuntu 24.04. We have exploratory Windows data on different hardware (see [PAPER.md Appendix A](PAPER.md#appendix-a-exploratory-windows-testing)), but it uses a different CPU and different engine, so it cannot be compared to these Linux results.
+
+3. **Context scaling is thin.** A dedup bug meant only ctx=512 was tested for most models. We know speed drops with context (multi-turn data shows 18-22%), but don't have precise per-context-length curves.
+
+4. **Perplexity failed to parse.** Quality data is limited to repetition rates. We can't precisely quantify how much Q2_K hurts output quality vs Q4_K_M.
+
+5. **Two models missing.** Falcon-H1R-7B and BitNet 2B4T produced no results (likely download/engine issues).
+
+6. **No engine comparison.** We only tested llama.cpp. llamafile, Ollama, and others may produce different results.
 
 ---
 
@@ -157,6 +180,7 @@ We're sharing these results as-is, warts and all:
 - **Falcon-H1R-7B and BitNet 2B4T produced no results.** Likely download or engine compatibility issues on bench-3. These need re-testing.
 - **Perplexity scores failed to parse.** The quality evaluation captured repetition rates but WikiText-2 perplexity came back null for all models. The perplexity runs may have timed out or the log parser had a regex mismatch.
 - **No engine comparison.** We planned to test llamafile, bitnet.cpp, and PowerInfer alongside llama.cpp, but these weren't installed on bench-3 in time.
+- **Windows not tested on same hardware.** Exploratory Windows data exists but on a different, weaker CPU. A proper cross-OS comparison is planned.
 
 If you re-run any of these and get better data, please open a PR.
 
@@ -168,10 +192,12 @@ If you re-run any of these and get better data, please open a PR.
 .
 ├── README.md                   # This file
 ├── PAPER.md                    # Detailed writeup of findings
+├── ROADMAP.md                  # What's next
 ├── results/
 │   ├── bench-1/                # Raw JSON results from server 1
 │   ├── bench-2/                # Raw JSON results from server 2
-│   └── bench-3/                # Raw JSON results from server 3
+│   ├── bench-3/                # Raw JSON results from server 3
+│   └── windows/                # Exploratory Windows data (different hardware)
 ├── scripts/
 │   ├── orchestrator.sh         # Master script — runs all phases
 │   ├── run_single_bench.sh     # Single experiment runner
@@ -194,13 +220,14 @@ If you re-run any of these and get better data, please open a PR.
 
 ## Contributing
 
-This is a living research project. Contributions welcome:
+Work in progress. Contributions welcome:
 
-- **Re-run experiments** on different hardware and share results
+- **Re-run experiments** on different hardware (especially consumer CPUs) and share results
 - **Fix the context scaling bug** and submit longer-context data
 - **Test models we missed** (Falcon-H1R, BitNet, newer releases)
-- **Engine comparisons** (llamafile, PowerInfer, bitnet.cpp)
+- **Engine comparisons** (llamafile, PowerInfer, bitnet.cpp, Ollama)
 - **Quality evaluation** improvements (working perplexity, MMLU)
+- **Windows testing on the same hardware** to enable proper cross-OS comparison
 
 Please open an issue first to discuss what you'd like to work on.
 
@@ -212,7 +239,7 @@ If you use this data in your work:
 
 ```
 @misc{locallm-bench-2026,
-  title={Can You Run a 30B LLM on 16GB RAM? Benchmarking Local LLM Inference on Consumer Hardware},
+  title={Benchmarking Local LLM Inference on 16GB x86 Hardware (Linux, Server-Grade CPUs)},
   author={chutapp},
   year={2026},
   url={https://github.com/chutapp/locallm-bench}
