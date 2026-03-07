@@ -8,9 +8,8 @@
     "logical_processors": 4,
     "total_ram_gb": 15.95,
     "available_ram_after_boot_gb": 13.78,
-    "inference_engine_ollama": "Ollama 0.17.7",
-    "inference_engine_llamacpp": "llama.cpp (latest, built from source)",
-    "date": "2026-03-06",
+    "inference_engine": "Ollama 0.17.7",
+    "date": "2026-03-07",
     "location": "eastus2"
   },
   "baseline_memory": {
@@ -20,138 +19,152 @@
     "os_overhead_pct": 13.6,
     "note": "Windows 11 Pro clean boot, no browser or user apps running"
   },
-  "benchmarks": [
+  "model_sweep": {
+    "description": "Systematic test of every model size from 1.7B to 12B to find what actually works on Windows 16GB",
+    "test_config": "300 tokens, ctx 2048, temp 0.7, seed 42, Ollama defaults (Q4_K_M)",
+    "usability_threshold": ">5 tok/s generation speed",
+    "results": [
+      {
+        "model": "qwen3:1.7b",
+        "params_b": 1.7,
+        "generation_tok_s": 8.3,
+        "prompt_tok_s": 18.0,
+        "ttft_s": 2.0,
+        "model_load_s": 7.7,
+        "ram_used_gb": 1.5,
+        "verdict": "USABLE"
+      },
+      {
+        "model": "llama3.2:3b",
+        "params_b": 3.0,
+        "generation_tok_s": 5.3,
+        "prompt_tok_s": 8.3,
+        "ttft_s": 6.2,
+        "model_load_s": 14.2,
+        "ram_used_gb": 2.1,
+        "verdict": "USABLE"
+      },
+      {
+        "model": "phi4-mini:3.8b",
+        "params_b": 3.8,
+        "generation_tok_s": 4.4,
+        "prompt_tok_s": 8.1,
+        "ttft_s": 3.6,
+        "model_load_s": 14.1,
+        "ram_used_gb": 2.7,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "model": "qwen3:4b",
+        "params_b": 4.0,
+        "generation_tok_s": 4.2,
+        "prompt_tok_s": 7.2,
+        "ttft_s": 5.0,
+        "model_load_s": 13.1,
+        "ram_used_gb": 3.0,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "model": "gemma3:4b",
+        "params_b": 4.0,
+        "generation_tok_s": 4.3,
+        "prompt_tok_s": 7.3,
+        "ttft_s": 4.8,
+        "model_load_s": 18.2,
+        "ram_used_gb": 4.0,
+        "verdict": "BORDERLINE"
+      },
+      {
+        "model": "qwen3:8b",
+        "params_b": 8.0,
+        "generation_tok_s": 2.3,
+        "prompt_tok_s": 3.8,
+        "ttft_s": 9.4,
+        "model_load_s": 26.7,
+        "ram_used_gb": 5.1,
+        "verdict": "NO"
+      },
+      {
+        "model": "llama3.1:8b",
+        "params_b": 8.0,
+        "generation_tok_s": 2.4,
+        "prompt_tok_s": 3.9,
+        "ttft_s": 9.2,
+        "model_load_s": 25.9,
+        "ram_used_gb": 4.7,
+        "verdict": "NO"
+      },
+      {
+        "model": "mistral:7b",
+        "params_b": 7.0,
+        "generation_tok_s": 2.7,
+        "prompt_tok_s": 3.8,
+        "ttft_s": 8.1,
+        "model_load_s": 22.1,
+        "ram_used_gb": 4.4,
+        "verdict": "NO"
+      },
+      {
+        "model": "gemma3:12b",
+        "params_b": 12.0,
+        "generation_tok_s": 1.5,
+        "prompt_tok_s": 2.5,
+        "ttft_s": 14.3,
+        "model_load_s": 41.8,
+        "ram_used_gb": 9.2,
+        "verdict": "NO"
+      }
+    ]
+  },
+  "large_model_tests": [
     {
-      "model": "qwen3:1.7b",
-      "params": "1.7B",
-      "architecture": "Dense",
-      "quantization": "Q4_K_M (Ollama default)",
-      "test": "quick_benchmark",
-      "tokens_generated": 500,
-      "generation_tok_s": 9.66,
-      "ttft_s": 1.58,
-      "model_load_s": 5.97,
-      "total_time_s": 60.68,
-      "ram_available_after_gb": 12.06,
-      "ram_consumed_gb": 1.72,
-      "context_length": 2048,
-      "usable": true
-    },
-    {
-      "model": "glm4:9b",
-      "params": "9B",
-      "architecture": "Dense",
-      "quantization": "Q4_K_M (Ollama default)",
-      "test": "quick_benchmark",
-      "tokens_generated": 500,
-      "generation_tok_s": 2.15,
-      "prompt_processing_tok_s": 5.5,
-      "prompt_tokens": 46,
-      "ttft_s": 8.37,
-      "model_load_s": 6.07,
-      "total_time_s": 248.69,
-      "ram_available_before_gb": 13.79,
-      "ram_available_after_gb": 8.51,
-      "ram_consumed_gb": 5.28,
-      "context_length": 2048,
-      "usable": false,
-      "note": "Below 5 tok/s usability threshold"
+      "model": "GLM-4.7-Flash (30B MoE, 3B active)",
+      "params_b": 30,
+      "architecture": "MoE",
+      "quantization": "Q2_K",
+      "gguf_size_gb": 10.57,
+      "inference_engine": "llama.cpp (built from source)",
+      "outcome": "THRASH",
+      "generation_tok_s": null,
+      "note": "Could not complete even 50 tokens in 30+ minutes. On Linux this model runs at 7.2 tok/s.",
+      "linux_comparison_tok_s": 7.2
     },
     {
       "model": "mistral-small:24b",
-      "params": "24B",
+      "params_b": 24,
       "architecture": "Dense",
-      "quantization": "Q4_K_M (Ollama default, 14GB model)",
-      "test": "quick_benchmark",
-      "tokens_generated": 500,
+      "quantization": "Q4_K_M (Ollama default, 14GB file)",
       "generation_tok_s": 0.97,
-      "prompt_processing_tok_s": 1.69,
-      "prompt_tokens": 201,
       "ttft_s": 118.84,
-      "model_load_s": 70.36,
-      "total_time_s": 707.08,
-      "ram_available_before_gb": 13.83,
-      "ram_available_after_gb": 0.65,
       "ram_consumed_gb": 13.18,
-      "context_length": 2048,
-      "usable": false,
-      "note": "Essentially all RAM consumed, nearly swapping"
-    },
-    {
+      "verdict": "NO",
+      "note": "Consumed nearly all RAM, 2-minute TTFT"
+    }
+  ],
+  "stress_tests": {
+    "concurrent_load": {
       "model": "glm4:9b",
-      "params": "9B",
-      "architecture": "Dense",
-      "quantization": "Q4_K_M (Ollama default)",
-      "test": "concurrent_load",
-      "tokens_generated": 300,
-      "generation_tok_s": 1.46,
-      "context_length": 2048,
-      "cpu_stress_threads": 2,
+      "baseline_tok_s": 2.15,
+      "under_stress_tok_s": 1.46,
       "speed_drop_pct": 32.1,
-      "note": "2 CPU stress threads simulating browser/apps background load"
+      "stress_threads": 2,
+      "note": "Linux shows only 0-5% drop under same conditions"
     },
-    {
+    "multi_turn": {
       "model": "glm4:9b",
-      "params": "9B",
-      "architecture": "Dense",
-      "quantization": "Q4_K_M (Ollama default)",
-      "test": "multi_turn",
-      "context_length": 2048,
-      "tokens_per_turn": 150,
-      "turns": [
-        { "turn": 1, "generation_tok_s": 2.31, "ttft_s": 1.60 },
-        { "turn": 2, "generation_tok_s": 2.29, "ttft_s": 2.69 },
-        { "turn": 3, "generation_tok_s": 2.23, "ttft_s": 2.18 },
-        { "turn": 4, "generation_tok_s": 2.18, "ttft_s": 2.72 },
-        { "turn": 5, "generation_tok_s": 2.17, "ttft_s": 2.70 }
-      ],
-      "speed_degradation_turn1_to_5_pct": 6.1,
-      "note": "Gradual degradation as context grows"
+      "turn_1_tok_s": 2.31,
+      "turn_5_tok_s": 2.17,
+      "degradation_pct": 6.1
     }
-  ],
-    {
-      "model": "GLM-4.7-Flash (30B MoE, 3B active)",
-      "params": "30B",
-      "architecture": "MoE",
-      "quantization": "Q2_K",
-      "gguf_size_gb": 10.57,
-      "inference_engine": "llama.cpp (built from source)",
-      "test": "quick_benchmark",
-      "tokens_requested": 500,
-      "context_length": 2048,
-      "outcome": "THRASH",
-      "generation_tok_s": null,
-      "note": "Model loaded but generation never completed. 10.57 GB model + Windows overhead (~2.2 GB) + KV cache leaves no headroom. The process ran for 30+ minutes without producing output. Even a 50-token test with ctx=512 could not complete. On Linux with 15.5 GB available this same model runs at 7.2 tok/s. Windows memory pressure from OS services + NTFS overhead makes it completely unusable.",
-      "linux_comparison": {
-        "same_model_linux_tok_s": 7.2,
-        "linux_available_ram_gb": 15.5,
-        "linux_outcome": "FITS",
-        "verdict": "GLM-4.7-Flash Q2_K works on Linux 16GB but is completely unusable on Windows 16GB"
-      }
-    },
-    {
-      "model": "GLM-4.7-Flash (30B MoE, 3B active)",
-      "params": "30B",
-      "architecture": "MoE",
-      "quantization": "Q2_K",
-      "gguf_size_gb": 10.57,
-      "inference_engine": "llama.cpp (built from source)",
-      "test": "quick_benchmark_50tok",
-      "tokens_requested": 50,
-      "context_length": 512,
-      "outcome": "THRASH",
-      "generation_tok_s": null,
-      "note": "Even with minimal context (512) and only 50 tokens requested, the model could not complete generation in 30+ minutes. Confirmed thrashing."
-    }
-  ],
+  },
   "key_findings": {
     "windows_os_overhead_gb": 2.17,
-    "windows_vs_linux_available_ram": "13.78 GB vs ~15.5 GB (Linux best case)",
-    "ram_penalty_pct": 11.1,
-    "concurrent_load_impact": "32% speed drop with 2 stress threads (vs 0-5% on Linux)",
-    "glm47flash_30b_moe": "COMPLETELY UNUSABLE on Windows. Same model that runs at 7.2 tok/s on Linux cannot complete even 50 tokens on Windows 16GB. The 10.57 GB GGUF + 2.2 GB Windows overhead + KV cache pushes past available RAM, causing disk thrashing.",
-    "mistral_small_24b": "Essentially unusable on Windows — 0.97 tok/s, consumes all RAM",
-    "glm4_9b": "Below usability at 2.15 tok/s, but stable",
-    "bottom_line": "On Windows 16GB, only models under ~8 GB GGUF size are viable. The MoE advantage that makes GLM-4.7-Flash our Linux winner is nullified by Windows memory overhead. Users on Windows 16GB are limited to 7-9B dense models at best."
+    "usability_line": "3B parameters. Llama 3.2 3B at 5.3 tok/s is the largest model that crosses the usability threshold on Windows 16GB CPU-only.",
+    "linux_usability_line": "30B parameters (MoE). GLM-4.7-Flash 30B at 7.2 tok/s. Linux lets you run a model 10x larger.",
+    "borderline_models": "3.8-4B models (Phi-4 Mini, Qwen3 4B, Gemma3 4B) sit at 4.2-4.4 tok/s. Tolerable for patient users.",
+    "7b_and_above": "All 7B+ models fall below 3 tok/s. Not usable for interactive conversation.",
+    "ram_is_not_the_bottleneck_for_small_models": "Even the 12B model only used 9.2 GB of the 13.8 GB available. The bottleneck is CPU speed (memory bandwidth), not RAM capacity.",
+    "windows_vs_linux_gap": "Windows users on 16GB CPU-only are limited to 3B models. Linux users can run 30B MoE. The gap is massive — not because of Windows memory overhead alone, but because the only model architecture that makes 30B viable (MoE) needs every GB of headroom that Linux provides.",
+    "recommendation_for_windows_users": "Use Llama 3.2 3B or Qwen3 1.7B through Ollama. For anything better, you need a GPU."
   }
 }
